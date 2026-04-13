@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     version="1.1" creator="VIA Chapter III Planner"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>VIA Chapter III — Offline POI Database</name>
+    <desc>Campgrounds, drinking water, toilets and showers along the VIA Chapter III Ultima Thule route. Curated from OSM data. Covers NL → DE → DK → SE → NO. Supplement with live Overpass query for full coverage.</desc>
+  </metadata>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NETHERLANDS — Amerongen start area
+       ═══════════════════════════════════════════════════════ -->
+
+  <wpt lat="51.9978" lon="5.4592">
+    <name>Camping Amerongen</name>
+    <desc>Camp · Near race start. Basic facilities.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="51.9641" lon="5.6647">
+    <name>Camping Wageningse Berg</name>
+    <desc>Camp · Wooded hill site near Wageningen. Showers, toilets.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="51.9700" lon="5.6600">
+    <name>Drinking Water — Wageningen centrum</name>
+    <desc>Water · Public tap in town square.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="51.9850" lon="5.9100">
+    <name>Camping Arnhem</name>
+    <desc>Camp · On route through Arnhem/Nijmegen corridor. Full facilities.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <!-- ═══════════════════════════════════════════════════════
+       GERMANY — Harz approach & Brocken
+       ═══════════════════════════════════════════════════════ -->
+
+  <wpt lat="51.8356" lon="10.7873">
+    <name>Campingplatz Wernigerode</name>
+    <desc>Camp · Best base for Brocken approach. Hot showers, bike wash.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="51.8300" lon="10.7800">
+    <name>Drinking Water — Wernigerode Markt</name>
+    <desc>Water · Public fountain in market square.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="51.7990" lon="10.6154">
+    <name>Toilets — Brocken summit</name>
+    <desc>Toilets · At Brocken summit station (Gate I). Open when staffed.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="51.7990" lon="10.6154">
+    <name>Water — Brocken summit hotel</name>
+    <desc>Water · Hotel/restaurant at summit. Ask for water fill.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="51.8500" lon="10.5500">
+    <name>Camping Thale</name>
+    <desc>Camp · Harz valley. Showers, toilets, basic kitchen.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="52.0300" lon="10.3400">
+    <name>Campingplatz Goslar</name>
+    <desc>Camp · Historic town. Good facilities for cyclists.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <!-- Germany North — Hamburg corridor -->
+
+  <wpt lat="52.3759" lon="9.7320">
+    <name>Campingplatz Hannover</name>
+    <desc>Camp · City campsite. Showers, toilets, laundry.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="53.5500" lon="10.0200">
+    <name>Camping Hamburg-Schnelsen</name>
+    <desc>Camp · Northwest Hamburg. Showers, bike-friendly.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="53.5753" lon="9.9910">
+    <name>Drinking Water — Hamburg Altona</name>
+    <desc>Water · Public fountain near Altona station.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="53.8667" lon="10.6833">
+    <name>Campingplatz Lübeck</name>
+    <desc>Camp · On route north toward Denmark ferry. Full facilities.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="54.3100" lon="10.1300">
+    <name>Campingplatz Kiel-Falckenstein</name>
+    <desc>Camp · Waterfront. Showers, toilets.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="54.4720" lon="11.1540">
+    <name>Camping Puttgarden</name>
+    <desc>Camp · Near ferry terminal. Basic. Useful if catching early ferry.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="54.5009" lon="11.2260">
+    <name>Toilets — Puttgarden Ferry Terminal</name>
+    <desc>Toilets · At ferry terminal. Free. Open 24hr during sailings.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="54.5009" lon="11.2260">
+    <name>Water — Puttgarden Terminal</name>
+    <desc>Water · Tap inside terminal building.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <!-- ═══════════════════════════════════════════════════════
+       DENMARK
+       ═══════════════════════════════════════════════════════ -->
+
+  <wpt lat="54.6927" lon="11.3855">
+    <name>Camping Rødby Havn</name>
+    <desc>Camp · Ferry arrival town. Showers, toilets.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="55.2295" lon="11.7648">
+    <name>Camping Næstved</name>
+    <desc>Camp · Mid-Denmark. Showers, toilets, bike-friendly.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="55.6700" lon="12.5900">
+    <name>Camping Copenhagen — Absalon</name>
+    <desc>Camp · Popular cyclist camp near Copenhagen. Full facilities.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="55.8833" lon="12.5333">
+    <name>Drinking Water — Rungsted Kyst station</name>
+    <desc>Water · Public tap at train station.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="56.0360" lon="12.6136">
+    <name>Toilets — Helsingør Ferry Terminal</name>
+    <desc>Toilets · At Helsingør–Helsingborg ferry terminal. Free.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="56.0360" lon="12.6136">
+    <name>Water — Helsingør Terminal</name>
+    <desc>Water · Inside terminal. Last easy fill before Sweden.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="56.0250" lon="12.6100">
+    <name>Camping Helsingør</name>
+    <desc>Camp · 2km from ferry terminal. Showers, toilets.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SWEDEN — West coast corridor
+       ═══════════════════════════════════════════════════════ -->
+
+  <wpt lat="56.0469" lon="12.6899">
+    <name>Toilets — Helsingborg Ferry Terminal</name>
+    <desc>Toilets · SE arrival. Terminal facilities. Free.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="56.0400" lon="12.7000">
+    <name>Camping Helsingborg Råå</name>
+    <desc>Camp · Seaside, 4km from terminal. Showers, toilets, kitchen.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="56.6745" lon="12.8577">
+    <name>Camping Halmstad Steninge</name>
+    <desc>Camp · Coast. Full facilities, bike-friendly.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="56.6700" lon="12.8500">
+    <name>Drinking Water — Halmstad centrum</name>
+    <desc>Water · Public fountain near Stortorget.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="57.1000" lon="12.2500">
+    <name>Camping Falkenberg Skrea</name>
+    <desc>Camp · Beach campsite. Good showers. Popular in summer — book ahead.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="57.7072" lon="11.9668">
+    <name>Camping Gothenburg Askim</name>
+    <desc>Camp · South Gothenburg. City bus access. Full facilities.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="57.7000" lon="11.9600">
+    <name>Drinking Water — Gothenburg Kungsportsplatsen</name>
+    <desc>Water · Central fountain. Easy fill point.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="58.3480" lon="11.9386">
+    <name>Camping Uddevalla</name>
+    <desc>Camp · On route north. Showers, toilets.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="58.9379" lon="11.1705">
+    <name>Camping Strömstad Dynekilen</name>
+    <desc>Camp · Final SE camp before Norway. Showers, toilets, shop.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="59.0944" lon="11.2518">
+    <name>Toilets — Svinesund Bridge</name>
+    <desc>Toilets · At border crossing rest area.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NORWAY — Gate II to Refuge
+       ═══════════════════════════════════════════════════════ -->
+
+  <wpt lat="59.1199" lon="11.3953">
+    <name>Camping Halden</name>
+    <desc>Camp · Near Gate II Fredriksten. Showers, toilets. 1km from fortress.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="59.1200" lon="11.3900">
+    <name>Drinking Water — Halden sentrum</name>
+    <desc>Water · Public tap near Torget.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="58.7900" lon="9.4200">
+    <name>Camping Skien</name>
+    <desc>Camp · Rv9 corridor. Showers, toilets.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="58.4670" lon="8.7670">
+    <name>Camping Kristiansand — Roligheden</name>
+    <desc>Camp · Coast. Full facilities. Good waypoint between Gate II and Suleskard.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="58.4600" lon="8.7600">
+    <name>Drinking Water — Kristiansand sentrum</name>
+    <desc>Water · Fountain at Rådhusplassen.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="58.6500" lon="7.9900">
+    <name>Camping Evje</name>
+    <desc>Camp · Rv9 inland route. Showers, toilets. Good Suleskard staging point.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="59.0100" lon="7.4300">
+    <name>Camping Tjørhom — Sirdal</name>
+    <desc>Camp · Near Suleskard (Gate III). Mountain. Basic but clean. Showers.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="59.0428" lon="7.1457">
+    <name>Toilets — Suleskard (Gate III)</name>
+    <desc>Toilets · At Suleskard summit. Basic pit toilets at parking area.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="59.0600" lon="6.9000">
+    <name>VIA Refuge — Sirdal corridor</name>
+    <desc>Camp · MANDATORY STOP. Free food, water, showers, workshop, charging. Min 15 min stay. Max 36hr. Cap stamped here.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NORWAY — Lysebotn → Vøringsfossen
+       ═══════════════════════════════════════════════════════ -->
+
+  <wpt lat="59.0548" lon="6.6451">
+    <name>Water — Lysebotn ferry terminal</name>
+    <desc>Water · Tap at ferry dock. Fill before/after crossing.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="59.0427" lon="6.2280">
+    <name>Camping Forsand</name>
+    <desc>Camp · After Lysebotn ferry. Riverside. Showers, toilets.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="59.4100" lon="6.5500">
+    <name>Camping Sauda</name>
+    <desc>Camp · Rv13 north. Showers, toilets.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="59.9700" lon="6.8200">
+    <name>Camping Eidfjord</name>
+    <desc>Camp · Hardangerfjord. Scenic. Full facilities. Near Vøringsfossen approach.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="60.4278" lon="7.2533">
+    <name>Toilets — Vøringsfossen viewpoint (Gate V)</name>
+    <desc>Toilets · At main viewpoint car park. Free. Seasonal.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="60.4100" lon="7.3400">
+    <name>Camping Fossli</name>
+    <desc>Camp · Near Vøringsfossen (Gate V). Historic hotel campsite. Showers.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NORWAY — Stave church loop (Gates IX, X, XI)
+       ═══════════════════════════════════════════════════════ -->
+
+  <wpt lat="61.0474" lon="7.8128">
+    <name>Toilets — Borgund Stave Church (Gate IX)</name>
+    <desc>Toilets · At visitor centre. Open during staffed hours (summer 08-20).</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="61.0400" lon="7.8000">
+    <name>Camping Lærdal</name>
+    <desc>Camp · Near Borgund. Riverside. Showers, toilets. NOTE: avoid Laerdalstunnelen — use Rv50.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="61.3011" lon="7.2468">
+    <name>Water — Solvorn ferry dock</name>
+    <desc>Water · Tap at Solvorn–Ornes ferry landing.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="61.2900" lon="7.1800">
+    <name>Camping Solvorn</name>
+    <desc>Camp · Fjordside village. Showers, toilets. Near Solvorn ferry for Urnes.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="61.2981" lon="7.3220">
+    <name>Toilets — Urnes Stave Church (Gate X)</name>
+    <desc>Toilets · At UNESCO site. Open staffed hours. NOTE: avoid Fodnestunnelen and Amlatunnelen.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="61.5800" lon="7.8300">
+    <name>Camping Luster</name>
+    <desc>Camp · Sognefjord area. Showers, toilets. On route to Sognefjellet.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="61.8395" lon="8.5663">
+    <name>Toilets — Lom Stave Church (Gate XI)</name>
+    <desc>Toilets · At church visitor centre. Seasonal. NOTE: avoid E6 Sel–Dombås.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="61.8350" lon="8.5600">
+    <name>Camping Lom</name>
+    <desc>Camp · Central Lom. Full facilities. Good resupply point.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="61.8400" lon="8.5600">
+    <name>Drinking Water — Lom sentrum</name>
+    <desc>Water · Tap at central car park.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NORWAY — Sognefjellet + Gaularfjellet (Gates VI, VII, VIII)
+       ═══════════════════════════════════════════════════════ -->
+
+  <wpt lat="61.5527" lon="7.9394">
+    <name>Toilets — Sognefjellet summit (Gate VI)</name>
+    <desc>Toilets · At Juvasshytta area. Basic. Seasonal. Highest national road 1,434m.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="61.5500" lon="7.9400">
+    <name>Water — Juvasshytta</name>
+    <desc>Water · Mountain hut at Sognefjellet. Ask staff. Summer only.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="61.4700" lon="7.5000">
+    <name>Camping Skjolden</name>
+    <desc>Camp · Head of Sognefjord. Showers, toilets. After Sognefjellet descent.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="61.3515" lon="6.5184">
+    <name>Toilets — Gaularfjellet summit (Gate VII)</name>
+    <desc>Toilets · Seasonal pit toilets at viewpoint. Use Fv13 — avoid E39 sections.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="61.4200" lon="6.8700">
+    <name>Camping Balestrand</name>
+    <desc>Camp · Sognefjord. Scenic. Showers, toilets. Good rest after Gaularfjellet.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="61.9500" lon="7.3300">
+    <name>Toilets — Strynefjellsveg (Gate VIII)</name>
+    <desc>Toilets · At Maristova on Gamle Strynefjellsveg. Old mountain inn. Seasonal.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="61.9500" lon="7.3300">
+    <name>Water — Maristova</name>
+    <desc>Water · Historic mountain inn. Ask for fill. Summer only. Avoid Kvivstunnelen.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="61.9000" lon="6.7800">
+    <name>Camping Stryn</name>
+    <desc>Camp · Town. Full facilities. Good resupply after Strynefjellsveg.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NORWAY — Dalsnibba + Trollstigen (Gates XIV, XIII, XII)
+       ═══════════════════════════════════════════════════════ -->
+
+  <wpt lat="62.0489" lon="7.2686">
+    <name>Toilets — Dalsnibba summit (Gate XIV)</name>
+    <desc>Toilets · At summit viewpoint 1,476m. Seasonal. Toll road free for cyclists.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="62.0489" lon="7.2686">
+    <name>Water — Dalsnibba summit cafe</name>
+    <desc>Water · Cafe at top. Ask for water. Summer only.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="62.1000" lon="7.1500">
+    <name>Camping Geiranger</name>
+    <desc>Camp · Fjord. Multiple sites. Busy in summer. Showers, toilets. NOTE: Geiranger–Hellesylt ferry is BANNED — use Rv63.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="62.4546" lon="7.6692">
+    <name>Toilets — Trollstigen (Gate XIII)</name>
+    <desc>Toilets · At Trollstigen visitor centre. Free. Open May–Oct. Approach from Åndalsnes (north).</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="62.4546" lon="7.6692">
+    <name>Water — Trollstigen visitor centre</name>
+    <desc>Water · Tap at visitor centre. Seasonal.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="62.5680" lon="7.7147">
+    <name>Camping Åndalsnes</name>
+    <desc>Camp · Town. Full facilities. Showers, laundry. Between Trollstigen and Svøufallet.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="62.5680" lon="7.7147">
+    <name>Drinking Water — Åndalsnes sentrum</name>
+    <desc>Water · Near train station.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="62.5700" lon="8.5000">
+    <name>Camping Sunndalsøra</name>
+    <desc>Camp · Rv70 valley. Showers, toilets. On route to Svøufallet (Gate XII).</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="62.5093" lon="9.0670">
+    <name>Toilets — Svøufallet (Gate XII)</name>
+    <desc>Toilets · Basic facilities at parking area near waterfall.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NORWAY — Atlantic Road → Vestkapp → Volda (Gates XV, XVI)
+       ═══════════════════════════════════════════════════════ -->
+
+  <wpt lat="63.0098" lon="7.4305">
+    <name>Toilets — Atlantic Ocean Road (Gate XV)</name>
+    <desc>Toilets · At Storseisundet bridge viewpoint. Free. Open all season.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="63.0100" lon="7.4300">
+    <name>Water — Atlantic Road café</name>
+    <desc>Water · Seasonal café at main viewpoint.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="62.7400" lon="7.1600">
+    <name>Camping Molde</name>
+    <desc>Camp · After Molde–Vestnes ferry. Full facilities. Showers, laundry.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="62.4700" lon="6.1500">
+    <name>Camping Ørsta</name>
+    <desc>Camp · Near Volda finish area. Showers, toilets. NOTE: avoid Eiksund tunnel and E39 sections.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="62.1865" lon="5.1259">
+    <name>Toilets — Vestkapp (Gate XVI)</name>
+    <desc>Toilets · Basic at car park. Final gate. Exposed — check wind before approaching cliff edge.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="61.8544" lon="6.0813">
+    <name>Water — Lote ferry terminal</name>
+    <desc>Water · Tap at Lote–Anda ferry dock.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="62.3749" lon="6.3315">
+    <name>Toilets — Festøya ferry terminal</name>
+    <desc>Toilets · At Festøya–Solavågen ferry. Open during sailings.</desc>
+    <sym>Restrooms</sym>
+    <type>toilet</type>
+  </wpt>
+
+  <wpt lat="62.1646" lon="5.9425">
+    <name>Water — Lauvstad ferry terminal</name>
+    <desc>Water · Tap at Lauvstad–Volda ferry dock. Last fill before finish.</desc>
+    <sym>Drinking Water</sym>
+    <type>water</type>
+  </wpt>
+
+  <wpt lat="62.1711" lon="6.0088">
+    <name>Camping Volda — FINISH</name>
+    <desc>Camp · Finish town. Full facilities. Race celebration 8 August 20:00. Showers, laundry — you'll need them.</desc>
+    <sym>Campground</sym>
+    <type>camp</type>
+  </wpt>
+
+  <wpt lat="62.1711" lon="6.0088">
+    <name>Showers — Volda Idrettshall</name>
+    <desc>Showers · Sports hall near finish. May be open for riders. Ask at race HQ.</desc>
+    <sym>Shower</sym>
+    <type>shower</type>
+  </wpt>
+
+</gpx>

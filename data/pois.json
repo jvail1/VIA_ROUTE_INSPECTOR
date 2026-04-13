@@ -1,0 +1,13 @@
+[
+  { "id": "w1", "type": "water", "name": "Fountain", "lat": 60.42783, "lng": 7.2533 },
+  { "id": "w2", "type": "water", "name": "Mountain Stream", "lat": 61.55, "lng": 7.93 },
+
+  { "id": "c1", "type": "camp", "name": "Campground", "lat": 61.84, "lng": 8.56 },
+  { "id": "c2", "type": "camp", "name": "Lakeside Camp", "lat": 62.05, "lng": 7.27 },
+
+  { "id": "t1", "type": "toilet", "name": "Public Toilet", "lat": 51.799, "lng": 10.615 },
+  { "id": "t2", "type": "toilet", "name": "Trailhead WC", "lat": 62.454, "lng": 7.669 },
+
+  { "id": "s1", "type": "shower", "name": "Sports Center", "lat": 62.171, "lng": 6.008 },
+  { "id": "s2", "type": "shower", "name": "Swimming Pool", "lat": 59.119, "lng": 11.395 }
+]

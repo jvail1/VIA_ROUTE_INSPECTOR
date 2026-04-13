@@ -1,0 +1,20 @@
+[
+  { "id": "start",  "name": "Start — De Proloog",          "lat": 52.00384, "lng": 5.46146,  "r": 500, "elevationM": 10,   "photoUrl": null },
+  { "id": "g1",    "name": "Gate I — Brocken",             "lat": 51.79895, "lng": 10.61544, "r": 400, "elevationM": 1141, "photoUrl": null },
+  { "id": "g2",    "name": "Gate II — Fredriksten",        "lat": 59.11994, "lng": 11.39534, "r": 400, "elevationM": 100,  "photoUrl": null },
+  { "id": "g3",    "name": "Gate III — Suleskard",         "lat": 59.04283, "lng": 7.14565,  "r": 400, "elevationM": 900,  "photoUrl": "https://raw.githubusercontent.com/jvail1/VIA_III_ULTIMA_THULE/main/mobile/assets/gate-photos/suleskard.jpeg" },
+  { "id": "g4",    "name": "Gate IV — Lysebotn",           "lat": 59.05483, "lng": 6.64508,  "r": 400, "elevationM": 0,    "photoUrl": "https://raw.githubusercontent.com/jvail1/VIA_III_ULTIMA_THULE/main/mobile/assets/gate-photos/lysebotn.jpeg" },
+  { "id": "g5",    "name": "Gate V — Vøringsfossen",       "lat": 60.42783, "lng": 7.2533,   "r": 400, "elevationM": 800,  "photoUrl": null },
+  { "id": "g6",    "name": "Gate VI — Sognefjellet",       "lat": 61.55272, "lng": 7.93937,  "r": 500, "elevationM": 1434, "photoUrl": null },
+  { "id": "g7",    "name": "Gate VII — Gaularfjellet",     "lat": 61.35147, "lng": 6.5184,   "r": 500, "elevationM": 630,  "photoUrl": null },
+  { "id": "g8",    "name": "Gate VIII — Strynefjellsveg",  "lat": 61.95081, "lng": 7.3298,   "r": 500, "elevationM": 1139, "photoUrl": null },
+  { "id": "g9",    "name": "Gate IX — Borgund",            "lat": 61.04738, "lng": 7.81278,  "r": 400, "elevationM": 350,  "photoUrl": null },
+  { "id": "g10",   "name": "Gate X — Urnes",               "lat": 61.29813, "lng": 7.32198,  "r": 400, "elevationM": 50,   "photoUrl": null },
+  { "id": "g11",   "name": "Gate XI — Lom",                "lat": 61.83953, "lng": 8.56631,  "r": 400, "elevationM": 380,  "photoUrl": "https://raw.githubusercontent.com/jvail1/VIA_III_ULTIMA_THULE/main/mobile/assets/gate-photos/lom-stave-church.jpeg" },
+  { "id": "g12",   "name": "Gate XII — Svøufallet",        "lat": 62.50932, "lng": 9.06695,  "r": 500, "elevationM": 800,  "photoUrl": null },
+  { "id": "g13",   "name": "Gate XIII — Trollstigen",      "lat": 62.4546,  "lng": 7.66918,  "r": 500, "elevationM": 850,  "photoUrl": "https://raw.githubusercontent.com/jvail1/VIA_III_ULTIMA_THULE/main/mobile/assets/gate-photos/trollstigen.jpeg" },
+  { "id": "g14",   "name": "Gate XIV — Dalsnibba",         "lat": 62.04885, "lng": 7.26859,  "r": 500, "elevationM": 1476, "photoUrl": null },
+  { "id": "g15",   "name": "Gate XV — Atlantic Road",      "lat": 63.0098,  "lng": 7.43054,  "r": 500, "elevationM": 5,    "photoUrl": null },
+  { "id": "g16",   "name": "Gate XVI — Vestkapp",          "lat": 62.18652, "lng": 5.12587,  "r": 500, "elevationM": 20,   "photoUrl": "https://raw.githubusercontent.com/jvail1/VIA_III_ULTIMA_THULE/main/mobile/assets/gate-photos/vestkapp.jpeg" },
+  { "id": "finish","name": "Finish — Volda",               "lat": 62.17109, "lng": 6.00881,  "r": 500, "elevationM": 5,    "photoUrl": "https://raw.githubusercontent.com/jvail1/VIA_III_ULTIMA_THULE/main/mobile/assets/gate-photos/volda-finish.jpeg" }
+]

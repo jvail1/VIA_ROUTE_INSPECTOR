@@ -1,0 +1,1634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name><![CDATA[VIA Chapter III - RACE Route & Locations]]></name>
+    <description><![CDATA[A map describing the route for the RACE challenge of VIA Chapter III, including layers (groups) for:<br>Mandatory locations<br>Tunnels<br>Ferries]]></description>
+    <Style id="icon-1569-0F9D58-normal">
+      <IconStyle>
+        <color>ff589d0f</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1569-0F9D58-highlight">
+      <IconStyle>
+        <color>ff589d0f</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1569-0F9D58">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1569-0F9D58-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1569-0F9D58-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1569-0F9D58-nodesc-normal">
+      <IconStyle>
+        <color>ff589d0f</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1569-0F9D58-nodesc-highlight">
+      <IconStyle>
+        <color>ff589d0f</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1569-0F9D58-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1569-0F9D58-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1569-0F9D58-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1603-000000-nodesc-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1603-000000-nodesc-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1603-000000-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1603-000000-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1603-000000-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1661-000000-normal">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1661-000000-highlight">
+      <IconStyle>
+        <color>ff000000</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1661-000000">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1661-000000-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1661-000000-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1898-FF5252-normal">
+      <IconStyle>
+        <color>ff5252ff</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1898-FF5252-highlight">
+      <IconStyle>
+        <color>ff5252ff</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1898-FF5252">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1898-FF5252-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1898-FF5252-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1898-FF5252-nodesc-normal">
+      <IconStyle>
+        <color>ff5252ff</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1898-FF5252-nodesc-highlight">
+      <IconStyle>
+        <color>ff5252ff</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1898-FF5252-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1898-FF5252-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1898-FF5252-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-1899-0288D1-normal">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-highlight">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-000000-1200-nodesc-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.2</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-000000-1200-nodesc-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.8</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-000000-1200-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-000000-1200-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-000000-1200-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-FF5252-3519-nodesc-normal">
+      <LineStyle>
+        <color>ff5252ff</color>
+        <width>3.519</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-FF5252-3519-nodesc-highlight">
+      <LineStyle>
+        <color>ff5252ff</color>
+        <width>5.2785</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-FF5252-3519-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-FF5252-3519-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-FF5252-3519-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-FF5252-3713-nodesc-normal">
+      <LineStyle>
+        <color>ff5252ff</color>
+        <width>3.713</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-FF5252-3713-nodesc-highlight">
+      <LineStyle>
+        <color>ff5252ff</color>
+        <width>5.5695</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-FF5252-3713-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-FF5252-3713-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-FF5252-3713-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-FF5252-3906-nodesc-normal">
+      <LineStyle>
+        <color>ff5252ff</color>
+        <width>3.906</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-FF5252-3906-nodesc-highlight">
+      <LineStyle>
+        <color>ff5252ff</color>
+        <width>5.859</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-FF5252-3906-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-FF5252-3906-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-FF5252-3906-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>Mandatory Locations - Race</name>
+      <Placemark>
+        <name>De Proloog, Amerongen</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X5AkLn2wy-V8zjqNdJoaj-1TuL5jrwoXRMvAAXv6Dg_85Z8FXI0_s_D1Mb5nRn64K6M1of8rKIpr1W9XGeFW3pJJBP8owzoC5Pk2mBW1DoWFcJYmLTWcKRfWQ1qhQDpDl5Wywz_4iu6TYJ2UYjCd9oozEJRY7VZfSDIFibsSFJfh0vmoA2YIAB70eJ9OZ9heE94pS9C-c6_ceutC2myJbLgy6lU3UL8OWdxbk0owLz4a0qkLBc3zSf85n8?authuser=1&fife=s16383" height="200" width="auto" /><br><br>Chapter III start]]></description>
+        <styleUrl>#icon-1661-000000</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X5AkLn2wy-V8zjqNdJoaj-1TuL5jrwoXRMvAAXv6Dg_85Z8FXI0_s_D1Mb5nRn64K6M1of8rKIpr1W9XGeFW3pJJBP8owzoC5Pk2mBW1DoWFcJYmLTWcKRfWQ1qhQDpDl5Wywz_4iu6TYJ2UYjCd9oozEJRY7VZfSDIFibsSFJfh0vmoA2YIAB70eJ9OZ9heE94pS9C-c6_ceutC2myJbLgy6lU3UL8OWdxbk0owLz4a0qkLBc3zSf85n8?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            5.4614658,52.0038475,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Brocken</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X7qHrVuFfWCQdQ-kg3sMC8mgGxtp8IqPJOYJ9XkLBoOzqfuDpDPvzfeNe2TBcGFLW062_NoCXWM5uKJ2lZrVPY1v-6ejDbptbAmFIOoixF6eZIYN7m7CxAMBZerJooksVB8PODRJrDKFsc6tfvMgvTccdfVH5kKV26d5peJ8O95r9OwYZgBjNG7oHyFT54ohBzFDk20DVB4sUJgQViMXZyYfJp4v6dlG7J3mO4dKuo1ETBYacXW8mvJliQ?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X7qHrVuFfWCQdQ-kg3sMC8mgGxtp8IqPJOYJ9XkLBoOzqfuDpDPvzfeNe2TBcGFLW062_NoCXWM5uKJ2lZrVPY1v-6ejDbptbAmFIOoixF6eZIYN7m7CxAMBZerJooksVB8PODRJrDKFsc6tfvMgvTccdfVH5kKV26d5peJ8O95r9OwYZgBjNG7oHyFT54ohBzFDk20DVB4sUJgQViMXZyYfJp4v6dlG7J3mO4dKuo1ETBYacXW8mvJliQ?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            10.6154488,51.7989526,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Fredriksten fortress</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X66xJLX5Zqo8MN9JXralAZxOUzLC4hFEZljGwWOC5jxxYaskr1IilfjV2H842uPo32Mect3D436K18LpOtOL6xoQEm79igFWE_vBq6e3bpckcNEyTfr9RLQwKLfsXs09bK8sQ7u0mh7rYWMYFvlE7Hnnws1U7eKtb17-eEcJHdY6w0lCdGxKOVtAbOitlM8R65v0b9FyriysC5mGx7GDTo1roOlelUHWl7I_6iUkW84MO8km9JR4ODpZ0A?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X66xJLX5Zqo8MN9JXralAZxOUzLC4hFEZljGwWOC5jxxYaskr1IilfjV2H842uPo32Mect3D436K18LpOtOL6xoQEm79igFWE_vBq6e3bpckcNEyTfr9RLQwKLfsXs09bK8sQ7u0mh7rYWMYFvlE7Hnnws1U7eKtb17-eEcJHdY6w0lCdGxKOVtAbOitlM8R65v0b9FyriysC5mGx7GDTo1roOlelUHWl7I_6iUkW84MO8km9JR4ODpZ0A?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            11.3953479,59.119941,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Botn Fjellstue</name>
+        <styleUrl>#icon-1603-000000-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.4099476,59.7695869,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Suleskard</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X64Dnijdp0sL4lvssQoNcIQDAhSmhspq_M7g8pVKUZsjxxeao5u7VCYoee-tU11jfsNimYySN227PsHzT9Eqe_LFSFCaewmdGOdqP1gIfCi81FOTtk3hQVJ1YoV1SKfTaRmT5kcugsNWbHXdChyjaEEVY_LDUGbIv_HDt8rBCrupS-OrjDQUgSCPj_G7jcX1ipA51ZYf7Lgf4DYVDjVd8tbuOw0cXOCfnO1gxaBB_LbaS2x7VTgyBOtmvU?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X64Dnijdp0sL4lvssQoNcIQDAhSmhspq_M7g8pVKUZsjxxeao5u7VCYoee-tU11jfsNimYySN227PsHzT9Eqe_LFSFCaewmdGOdqP1gIfCi81FOTtk3hQVJ1YoV1SKfTaRmT5kcugsNWbHXdChyjaEEVY_LDUGbIv_HDt8rBCrupS-OrjDQUgSCPj_G7jcX1ipA51ZYf7Lgf4DYVDjVd8tbuOw0cXOCfnO1gxaBB_LbaS2x7VTgyBOtmvU?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            7.1456556,59.0428319,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lysebotn</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X4laWf8gM4YCVSKnJ11SaesvC1VOUJlFV5K-zuaQ5ueHrP2ADFOUhJWmaQYFi5I7_sFbV91OkDwLpFTim8gyG0BPFA9EzLYXfi-YLM9Fb6geeW4Wt830Fzr8KQ9b4vrkGAhBbMaKfHQgzp0HhMWDOhQOocvpuh7l8WR312TvZDkZqnMa8NJYN8V2Dy3rw9dIirF4BEWAGaw0cYcolhZZqDOMjIFMk3_8Y_IBAKGcywLIU8OEyGSgfBV6uc?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X4laWf8gM4YCVSKnJ11SaesvC1VOUJlFV5K-zuaQ5ueHrP2ADFOUhJWmaQYFi5I7_sFbV91OkDwLpFTim8gyG0BPFA9EzLYXfi-YLM9Fb6geeW4Wt830Fzr8KQ9b4vrkGAhBbMaKfHQgzp0HhMWDOhQOocvpuh7l8WR312TvZDkZqnMa8NJYN8V2Dy3rw9dIirF4BEWAGaw0cYcolhZZqDOMjIFMk3_8Y_IBAKGcywLIU8OEyGSgfBV6uc?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            6.645085,59.0548383,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Vøringfossen</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X6paY9Te8ZdGoaD_TdxjmC0bTxLnK88v5hslB78PVE8TbHf3ihJaWPREofqWFg5AFhQP2-mazY2eZp9WFODvQ6m_z1nhsLbg3zMjZnKSsG8nE521nhMYitOdkZB1eK4Zbfin5HabJ3w50ujj0Smk8APYJUrCorJoCQFg_Bhwz-M-M6Snh5QpBzcTagH26YVblceem_XcVdEY4qI5agb4-K49EYcramq95v1QBn-sbgBL-M4nmdFCe8USLA?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X6paY9Te8ZdGoaD_TdxjmC0bTxLnK88v5hslB78PVE8TbHf3ihJaWPREofqWFg5AFhQP2-mazY2eZp9WFODvQ6m_z1nhsLbg3zMjZnKSsG8nE521nhMYitOdkZB1eK4Zbfin5HabJ3w50ujj0Smk8APYJUrCorJoCQFg_Bhwz-M-M6Snh5QpBzcTagH26YVblceem_XcVdEY4qI5agb4-K49EYcramq95v1QBn-sbgBL-M4nmdFCe8USLA?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            7.2533053,60.4278344,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sognefjellet</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X4o1rZjk8qiiL2aVEs4M4sk8N__dVNFY48rk7gOZiifE6BRoSe1TNqIWVNaWGM1L76nZgFSWILNLcahEt2z3NAjpSIz97DtwQMsPFkjgoo2vDhCotD_RS19etYBoUdYVvTiXZDvssn-gYBFu-Fige0mMBAQ5kuPspZfY15p3fqVw9ofZsxiMrDNiH3tZxWAuOgZTyjaPm9O3MrbWeVjJbQt1Kp_F_leSiC5PJjRWF3Z2rRX2eO4qF35K4M?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X4o1rZjk8qiiL2aVEs4M4sk8N__dVNFY48rk7gOZiifE6BRoSe1TNqIWVNaWGM1L76nZgFSWILNLcahEt2z3NAjpSIz97DtwQMsPFkjgoo2vDhCotD_RS19etYBoUdYVvTiXZDvssn-gYBFu-Fige0mMBAQ5kuPspZfY15p3fqVw9ofZsxiMrDNiH3tZxWAuOgZTyjaPm9O3MrbWeVjJbQt1Kp_F_leSiC5PJjRWF3Z2rRX2eO4qF35K4M?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            7.9393742,61.5527291,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Gaularfjellet</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X7-glqFCA2tMs51VU1hwkNVFZa2N8ARrMtYR7Q95tRONOW1-PLDlzPQNfvlIo6Ps1cQlHfo58o8FzFUXqcNaL_9m_Catvd9w6xEq2KbQ8ExUctWBB2vLSLsLiCovOGqBw4RgWO7Wg5xt9BMIv9iz8FJ22uy17fXfxN6X-pGUx_sFX5MOikNTX6sulI72VmxZbaSSj2UBH7TUExsdpc1xVwrwCQBJmSyMAIULrm0Ca7rdPOdjmkvW4O9rCo?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X7-glqFCA2tMs51VU1hwkNVFZa2N8ARrMtYR7Q95tRONOW1-PLDlzPQNfvlIo6Ps1cQlHfo58o8FzFUXqcNaL_9m_Catvd9w6xEq2KbQ8ExUctWBB2vLSLsLiCovOGqBw4RgWO7Wg5xt9BMIv9iz8FJ22uy17fXfxN6X-pGUx_sFX5MOikNTX6sulI72VmxZbaSSj2UBH7TUExsdpc1xVwrwCQBJmSyMAIULrm0Ca7rdPOdjmkvW4O9rCo?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            6.5184076,61.3514747,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Strynefjellsveg</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X6ym5vM4vMu2OX8St-vuTZJM5AFiVe37TDD_G3Rtvk7Nx3XeNrOmp_2ppWoBdJ7J8hOBl4TYBRilpkvroZLNQHFyvQMk2ayN3ujyt980YgOmHcn0JATbsaK04otpYcDh_-dtyT-mv79w2Ph5RAydI2keYGGqtka-I0OouhVn8MkSEedASVCz-OeCTCc16IaDoVoFCAxhMTtvcSSYxSo1Rq9yg_-hUWq8O1PRI8vMCyHZ0W72AmcXwHxJgQ?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X6ym5vM4vMu2OX8St-vuTZJM5AFiVe37TDD_G3Rtvk7Nx3XeNrOmp_2ppWoBdJ7J8hOBl4TYBRilpkvroZLNQHFyvQMk2ayN3ujyt980YgOmHcn0JATbsaK04otpYcDh_-dtyT-mv79w2Ph5RAydI2keYGGqtka-I0OouhVn8MkSEedASVCz-OeCTCc16IaDoVoFCAxhMTtvcSSYxSo1Rq9yg_-hUWq8O1PRI8vMCyHZ0W72AmcXwHxJgQ?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            7.3298056,61.9508112,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Borgund Stavkyrkje</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X46RrocLqujp3zpEqk4kG1eUmgHCRByha_XeNJ2rNBNxTRBhifP2HRpjjChHce4QkH4vIMQoSqw7bzSABzXPIXRK4k3X1-P4tzJx_TksrvLnieZhaJ8mZhG6aZKs3qZA1--msMjZgQz6UGp3UU2ciP7I4d29rPtVE7ZUOsAtOWjJP61V9UT13y3b65Z4Z9ZNUj0Z1bK8xtXXbj10pLUScG9_FwuxSipZlb9beTfOuIMORPbI0p8LK9ikh0?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X46RrocLqujp3zpEqk4kG1eUmgHCRByha_XeNJ2rNBNxTRBhifP2HRpjjChHce4QkH4vIMQoSqw7bzSABzXPIXRK4k3X1-P4tzJx_TksrvLnieZhaJ8mZhG6aZKs3qZA1--msMjZgQz6UGp3UU2ciP7I4d29rPtVE7ZUOsAtOWjJP61V9UT13y3b65Z4Z9ZNUj0Z1bK8xtXXbj10pLUScG9_FwuxSipZlb9beTfOuIMORPbI0p8LK9ikh0?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            7.8123328,61.0474729,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Urnes stavkyrkje</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X5ffR8_5x4Llp9gm0-qoy1a_r1yQjJyRCBvBZbeFBWBWqrjl1KQBzlLxGNnZ2-q8bn1vqUqpRceWavIeDwcsxYyciVNyukXbhASBXs2fOgvAm7NaCriqYtUgfcBkEt7xTIhyOWG4FQU8Udyg07hKa1AmnnEEr-V3Fx9vF3gzGkTaS0a-A7X4vPFdeS5EA1v9Fqf3kG8Zu7SvNzuja6t0nh86_N_OGt4dkS28p2yLp087d-t7wTSsbgHhmw?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X5ffR8_5x4Llp9gm0-qoy1a_r1yQjJyRCBvBZbeFBWBWqrjl1KQBzlLxGNnZ2-q8bn1vqUqpRceWavIeDwcsxYyciVNyukXbhASBXs2fOgvAm7NaCriqYtUgfcBkEt7xTIhyOWG4FQU8Udyg07hKa1AmnnEEr-V3Fx9vF3gzGkTaS0a-A7X4vPFdeS5EA1v9Fqf3kG8Zu7SvNzuja6t0nh86_N_OGt4dkS28p2yLp087d-t7wTSsbgHhmw?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            7.3219826,61.2981312,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lom Stavkyrkje</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X5vN3qf_BR6Krl0fB6Ge69oPvJHB6rnBHX-pkULmTNiDMawAmyn2-lcgEr871Bdu3wsg-WzUMizoZC0oKwyfi_gYVe8l1uyBjHSxKUBHT2A1ydgvfFpjWmeLinzSAlfBj-AUoc7W6pku2879kJuYrmyT6843ojOjBLcUcye8-cyr19jVdZ-bSr9Bba_AA9VGjUnppIOKh8e32rC906XxRlhdJ7ZF3eivjvxev9RY7EKxlizNqGPCcsm9AM?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X5vN3qf_BR6Krl0fB6Ge69oPvJHB6rnBHX-pkULmTNiDMawAmyn2-lcgEr871Bdu3wsg-WzUMizoZC0oKwyfi_gYVe8l1uyBjHSxKUBHT2A1ydgvfFpjWmeLinzSAlfBj-AUoc7W6pku2879kJuYrmyT6843ojOjBLcUcye8-cyr19jVdZ-bSr9Bba_AA9VGjUnppIOKh8e32rC906XxRlhdJ7ZF3eivjvxev9RY7EKxlizNqGPCcsm9AM?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            8.5663154,61.8395326,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Svøufallet</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X5LI6CxOSqSOln41B94mpAO1b6rU1YnBH3OZx6L-benmvhrgYqtHXU7YvMy6_vLaQ0hLnumQBEq5GHHN_HtkLIeM1FOk6eEXY9QE0V7vrz32Ta4rQiYaMYJTgAtfxruM_nI0W1ZzvdLNkQvnM-lt7P72tnuw62P0KoJ9JHsENm3fKikUmmq245C7g8VhuBavcGai1lfBmJcotSrttgNKeeFiN5Ke-1ln_1xK70GvR8ffIQHzl-D83PtVIE?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X5LI6CxOSqSOln41B94mpAO1b6rU1YnBH3OZx6L-benmvhrgYqtHXU7YvMy6_vLaQ0hLnumQBEq5GHHN_HtkLIeM1FOk6eEXY9QE0V7vrz32Ta4rQiYaMYJTgAtfxruM_nI0W1ZzvdLNkQvnM-lt7P72tnuw62P0KoJ9JHsENm3fKikUmmq245C7g8VhuBavcGai1lfBmJcotSrttgNKeeFiN5Ke-1ln_1xK70GvR8ffIQHzl-D83PtVIE?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            9.0669501,62.5093218,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Atlantic road</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X6FkdtZs2Xf7_GkD7mhP0Wp29i37mVqovgvcQ2nn6xGLr0lHHHuPOTv-AHcCt4X-w84VTKFEremWMhAbrCTXGmQjwSgbg_jUuhhwj_YcdopCxyB6y8GuhelMeNmKz9w0ixm_QsAdqoIfWzQEd8YyZ8M-mRHVNShxsBpd20hWrasnxBOH6C8Xf2Jtfz-dZUoLpgqrc6cPawM2gcyq4boPXGaFJoQ0lWx9yj0OfcxrpgYdzlKa9QIB2pGLec?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X6FkdtZs2Xf7_GkD7mhP0Wp29i37mVqovgvcQ2nn6xGLr0lHHHuPOTv-AHcCt4X-w84VTKFEremWMhAbrCTXGmQjwSgbg_jUuhhwj_YcdopCxyB6y8GuhelMeNmKz9w0ixm_QsAdqoIfWzQEd8YyZ8M-mRHVNShxsBpd20hWrasnxBOH6C8Xf2Jtfz-dZUoLpgqrc6cPawM2gcyq4boPXGaFJoQ0lWx9yj0OfcxrpgYdzlKa9QIB2pGLec?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            7.4305412,63.0098059,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Trollstigen</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X4spsPLgay1s_J11yuD9tgadFCVTnC9SGv7nbGGUFVzhbVuLfi_3k3lJrIcI9Q58BfVKx6jPmZ3o-V4aKA9s4PEJROcOn0PwWY8Yzr9DjHKjW81c6Vd9DGs3m7LOTjc3umpVsxmElzerGD97c3jFZaDp1AIJ-Dff6NYjfpnCM-_YLqbMUdjcNakf4pLrXQDSw0qVUFlBDv3kZCpQC35Wa-Zkd-xjzlgySt5FyINAkW9AusGYTls1RWRvHI?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X4spsPLgay1s_J11yuD9tgadFCVTnC9SGv7nbGGUFVzhbVuLfi_3k3lJrIcI9Q58BfVKx6jPmZ3o-V4aKA9s4PEJROcOn0PwWY8Yzr9DjHKjW81c6Vd9DGs3m7LOTjc3umpVsxmElzerGD97c3jFZaDp1AIJ-Dff6NYjfpnCM-_YLqbMUdjcNakf4pLrXQDSw0qVUFlBDv3kZCpQC35Wa-Zkd-xjzlgySt5FyINAkW9AusGYTls1RWRvHI?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            7.6691802,62.4546011,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Dalsnibba</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X6E-iolEmbj2VdKXWnIUy0VwDP_r118DTJFz308wVP_oEHgrpt2oA8RDuopGkDIrMTuixCGVAxVI1FZhCOCCorh_42YxlNHp12zn6wcTfi1f_2uFuJplMLGr-yoqqvg27zSEHR1hZA4IraI-n957xGUi324OTKOTJyCw_rv15YAc9aWK3nxEjMmE8Kk57t3NiGWqIcI2QSqDvKfU0UyrQqslh-JLL1H0Kg-eCmAmd5SQgsnSlpW5I8FM0A?authuser=1&fife=s16383" height="200" width="auto" /><br><br>Overlooking Geiranger<br><br><img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X7v4Jp_MjHyTj2LqPCWlLb8YSYhaR5c4nbS69o4B7nTqH2ianPeZyZryqy49uvLhyD3dHK3gs38uoVLDRH4AGYHUyDGsh4b20Or9hXyseSuHZCrkcw37mW3Gyfiny1Chxc--E8meTV928hRKlM_6iv9CG146hrm6laRAWEhFrrLFa0qrS_97DSqgm0GL9OLgAR_Wcrmx5Pr_fmWCMIFLIn4glccMdQ-y6QqQg93zOAhvx3Dihp6_d0c43g?authuser=1&fife=s16383" height="200" width="auto" />]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X6E-iolEmbj2VdKXWnIUy0VwDP_r118DTJFz308wVP_oEHgrpt2oA8RDuopGkDIrMTuixCGVAxVI1FZhCOCCorh_42YxlNHp12zn6wcTfi1f_2uFuJplMLGr-yoqqvg27zSEHR1hZA4IraI-n957xGUi324OTKOTJyCw_rv15YAc9aWK3nxEjMmE8Kk57t3NiGWqIcI2QSqDvKfU0UyrQqslh-JLL1H0Kg-eCmAmd5SQgsnSlpW5I8FM0A?authuser=1&fife=s16383 https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X7v4Jp_MjHyTj2LqPCWlLb8YSYhaR5c4nbS69o4B7nTqH2ianPeZyZryqy49uvLhyD3dHK3gs38uoVLDRH4AGYHUyDGsh4b20Or9hXyseSuHZCrkcw37mW3Gyfiny1Chxc--E8meTV928hRKlM_6iv9CG146hrm6laRAWEhFrrLFa0qrS_97DSqgm0GL9OLgAR_Wcrmx5Pr_fmWCMIFLIn4glccMdQ-y6QqQg93zOAhvx3Dihp6_d0c43g?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            7.268595,62.0488539,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Vestkapp</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X6LdodduhU8nsh2fw4jmBECkzDjy1L0NruhE5g5nDYKWDyXlnY4IDkMRH0wQ-KvtjnE7AaSbvg_1SDXQIIzmzkzU0bcwNVJQObSuS-bPJa6XdjQh80wUDV6VF0UNw83ClPjS8rXl8I2LkVCzJnC-CWjpfLbI_w-wuUrhJXBv0pp1dA2QwsOWEHGeaI9RYWMedw83ERRjdHTtYunz_v59GIEx22bIQbWkrsPgvjJAFqpOziGx4VsVwBR1ME?authuser=1&fife=s16383" height="200" width="auto" /><br><br>]]></description>
+        <styleUrl>#icon-1899-0288D1</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X6LdodduhU8nsh2fw4jmBECkzDjy1L0NruhE5g5nDYKWDyXlnY4IDkMRH0wQ-KvtjnE7AaSbvg_1SDXQIIzmzkzU0bcwNVJQObSuS-bPJa6XdjQh80wUDV6VF0UNw83ClPjS8rXl8I2LkVCzJnC-CWjpfLbI_w-wuUrhJXBv0pp1dA2QwsOWEHGeaI9RYWMedw83ERRjdHTtYunz_v59GIEx22bIQbWkrsPgvjJAFqpOziGx4VsVwBR1ME?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            5.1258715,62.1865205,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Volda</name>
+        <description><![CDATA[<img src="https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X7z4Agj9fRQl5V04cm-4OK-7aebdcMfhLv0z10ZNCGEGWgj0ULwxySsHMJY-P0Dm_G7weOxUhldXL_aR3IzxXlOtkKIZowtTnHn0wPILY9TAVK3wb53dIYIoTPy4_D0d9gOJXYZ2B4TFaB5aTwiF1vQUqaW5oTNnOc0EwHMSL3Vyl353-O44fXrFrWskWzd6JGyUa3cPogvmIazENX3qAy9JD3zzTCAA3KEY6A1fNJ_SnT2qexI9dqARUo?authuser=1&fife=s16383" height="200" width="auto" /><br><br>Chapter III Finish]]></description>
+        <styleUrl>#icon-1661-000000</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value><![CDATA[https://mymaps.usercontent.google.com/hostedimage/m/*/3AL_Y2X7z4Agj9fRQl5V04cm-4OK-7aebdcMfhLv0z10ZNCGEGWgj0ULwxySsHMJY-P0Dm_G7weOxUhldXL_aR3IzxXlOtkKIZowtTnHn0wPILY9TAVK3wb53dIYIoTPy4_D0d9gOJXYZ2B4TFaB5aTwiF1vQUqaW5oTNnOc0EwHMSL3Vyl353-O44fXrFrWskWzd6JGyUa3cPogvmIazENX3qAy9JD3zzTCAA3KEY6A1fNJ_SnT2qexI9dqARUo?authuser=1&fife=s16383]]></value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            6.0088103,62.1710914,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name><![CDATA[Tunnels, Illegal & Banned roads]]></name>
+      <Placemark>
+        <name>Storebaeltsbroen bridge</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            10.9788407,55.3341093,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Øresundsbron bridge</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            12.7921472,55.5834381,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>E39 road section only</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.0611851,62.1466807,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>E39 Voldavegen road section</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.054351,62.1760515,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>E39 road section</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.3301242,62.3750587,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>E39 Vassenden-Skei</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.1114949,61.4964106,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>E39 Sandane</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.2318824,61.7723655,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>E6 Sel-Dombås</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            9.4320075,61.8487447,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Innfjord tunnel</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.612831,62.5302083,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>NORTHBOUND - Hellesylt tunnel</name>
+        <description>South to North</description>
+        <styleUrl>#icon-1898-FF5252</styleUrl>
+        <Point>
+          <coordinates>
+            6.9037463,62.1150105,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Flenjatunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.0977859,60.8830105,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Eiksund tunnel</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.9066298,62.2195243,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rotsethorntunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.1225543,62.112662,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rotsethorntunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.0949121,62.1314871,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hjartåbergtunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.1893627,62.10079,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Oppljostunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.3239302,61.9963912,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Gudvangatunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.9394011,60.8859318,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Tunnel near Dovre</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            9.243423,61.9874956,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Fodnestunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.4370433,61.1410094,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Laerdalstunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.3851414,60.9768195,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Morkaaastunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.0444765,62.1766842,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kvivstunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.4964223,61.998371,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Amlatunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.3189463,61.1731932,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Selvågtunnelen</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.8557836,62.2598,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ørstavegen - E39 from Volda </name>
+        <styleUrl>#line-FF5252-3519-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            6.0612116,62.1466532,0
+            6.0594357,62.1489123,0
+            6.0552562,62.1507704,0
+            6.0539945,62.1520871,0
+            6.0487843,62.1537646,0
+            6.0461377,62.1565732,0
+            6.0431473,62.1590611,0
+            6.0376886,62.1607171,0
+            6.0366929,62.1616516,0
+            6.0392678,62.164918,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>E39 from Festøya</name>
+        <styleUrl>#line-FF5252-3906-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            6.3310461,62.3749564,0
+            6.3284926,62.3755136,0
+            6.3225379,62.3749068,0
+            6.3167553,62.3737027,0
+            6.3122706,62.3711952,0
+            6.3040306,62.3689633,0
+            6.2942469,62.367089,0
+            6.2805193,62.3624635,0
+            6.2706876,62.3601369,0
+            6.2597975,62.3594656,0
+            6.2492509,62.3596696,0
+            6.2334698,62.3573638,0
+            6.2228411,62.3538622,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>E39 Sandane</name>
+        <styleUrl>#line-FF5252-3519-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            6.2318824,61.7723655,0
+            6.2300813,61.7742524,0
+            6.2214124,61.7777432,0
+            6.2192237,61.779042,0
+            6.2151896,61.7803002,0
+            6.2074649,61.7856976,0
+            6.170647,61.795122,0
+            6.1537203,61.81022,0
+            6.1438182,61.811365,0
+            6.1386942,61.8155046,0
+            6.1256166,61.8179289,0
+            6.1215445,61.8204731,0
+            6.1192506,61.8213145,0
+            6.1161294,61.8216592,0
+            6.113094,61.8223888,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>E39 Vassenden-Skei
+</name>
+        <styleUrl>#line-FF5252-3713-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            6.1131067,61.4942915,0
+            6.1309968,61.5036056,0
+            6.1564522,61.5117697,0
+            6.1951429,61.5187824,0
+            6.2273309,61.5297151,0
+            6.2626927,61.5273415,0
+            6.2939279,61.5241419,0
+            6.3339597,61.5359793,0
+            6.3418271,61.5408184,0
+            6.3493541,61.5482747,0
+            6.3661324,61.5563154,0
+            6.4436559,61.5619202,0
+            6.4772611,61.5714261,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>E6 Sel-Dombås</name>
+        <styleUrl>#line-FF5252-3519-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            9.4322809,61.848573,0
+            9.4228369,61.8527603,0
+            9.4168241,61.8566232,0
+            9.4072043,61.8598379,0
+            9.3982689,61.8640235,0
+            9.401873,61.8668568,0
+            9.4147484,61.8695276,0
+            9.4188678,61.8725219,0
+            9.4202415,61.8766491,0
+            9.4160366,61.8784293,0
+            9.4108013,61.8795621,0
+            9.4020454,61.8842543,0
+            9.4042769,61.8876919,0
+            9.4041054,61.8914532,0
+            9.3934648,61.8966294,0
+            9.3745796,61.9002675,0
+            9.3522636,61.9183734,0
+            9.3375007,61.9209591,0
+            9.3083183,61.9290379,0
+            9.3038559,61.9342064,0
+            9.3017952,61.9443819,0
+            9.2926987,61.9493067,0
+            9.2777626,61.9524545,0
+            9.253215,61.9651243,0
+            9.2498261,61.9805541,0
+            9.2459574,61.9864583,0
+            9.2338461,61.9912333,0
+            9.224528,61.9979729,0
+            9.2193264,62.0060016,0
+            9.2078872,62.0131942,0
+            9.1769142,62.0268527,0
+            9.1661629,62.0352979,0
+            9.1447601,62.0427754,0
+            9.1433262,62.0463931,0
+            9.1346814,62.0493669,0
+            9.1353054,62.0533061,0
+            9.1294057,62.0566016,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Ferries</name>
+      <Placemark>
+        <name>All ferries to/from Kiel</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            10.2140204,54.4257049,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>All ferries to/from Göteborg</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            11.6169682,57.5972632,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>All ferries to/from Trelleborg</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            13.1476433,55.3124167,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>All ferries to/from Oslo</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            10.4962603,58.9520219,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>All ferries to/from Ystad</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            13.8583103,55.3677509,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>All ferries to/from Malmö</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            12.8987071,55.6138425,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>All ferries to/from Hirsthals</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            9.8414661,57.6713899,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Geiranger-Hellesylt ferry</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.0433726,62.0903365,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Grenaa-Halmstad ferry</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            11.6883929,56.5901326,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Travemünde ferries</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            10.9024724,53.9666179,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Gudvangen to Undredal ferry</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.8603924,60.8930278,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kaupanger ferry</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.2528814,61.1787431,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Nordenham-Bremerhaven ferry</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            8.5630509,53.5295185,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rostock-Gedser ferry</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            12.0468932,54.3014205,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Brake-Sandstedt ferry</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            8.4985764,53.3623154,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lemwerder-Vegesack ferry</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            8.6197299,53.1679193,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Motzen-Blumenthal ferry</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            8.5590239,53.1814693,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Aarhus-Yderby ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            10.6725787,56.0392065,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Roervig-Hundested ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            11.8113729,55.9541846,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Helsingør-Helsingborg ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            12.6503857,56.0343064,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Spodsbjerg-Taars ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            10.8925191,54.9176314,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Puttgaden-Rødby ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            11.2937425,54.5905426,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Fynshav ferries</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            10.0210216,55.0366518,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hou-Saelvig ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            10.3945287,55.9078158,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballen-Kalundborg ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            10.710702,55.7878627,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Wischhafen-Glückstadt ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            9.3702672,53.7906347,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Schiffsanleger-Teufelsbruck ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            9.8519104,53.546126,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lauvstad-Volda ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.9952324,62.1592951,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Folkestad-Volda ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.0458561,62.1324874,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hjørundfjord ferries</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.4923754,62.2381808,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Festøya ferries</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.3342531,62.3768072,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Isane-Stårheim ferries</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.7218328,61.8987826,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Oldeide ferries</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.0821599,61.8821428,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lote-Anda ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.0809285,61.8535713,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Linge-Eidsdal ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.1729835,62.2747835,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Stranda-Liabygda ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.9741997,62.3094238,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sølnes-Herjestranda ferry
+</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.4839074,62.6753358,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Molde-Vestnes ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            7.0969199,62.6971196,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sykkelven-Magerholm ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.5223082,62.420584,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Moss-Horten ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            10.5904446,59.4035978,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rüschpark-Teufelsbrück</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            9.8628792,53.5448044,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Vangsnes-Dragsvik ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.6048859,61.1934323,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hella-Vangsnes ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.6118139,61.1954021,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Dragsvik-Hella ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.5813392,61.2111873,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Oppedal-Lvik ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.5041073,61.0800023,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Kinsarvik-Utne ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.6839883,60.4012993,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Utne-Kvanndal ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.617117,60.444004,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Tørvikbygd-Jondal ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.2070559,60.2899337,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Gjermundshamn-Årsnes ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.9679466,60.0618216,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Utaker-Skånevik ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.913822,59.7707518,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Skånevik-Matre ferry</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.9293572,59.7726097,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ballen-Kalundborg ferry</name>
+        <styleUrl>#line-000000-1200-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            10.6448296,55.8087869,0
+            10.6544427,55.8118737,0
+            10.8508233,55.7284443,0
+            11.0787896,55.6661422,0
+            11.0897759,55.6762101,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Rostock-Gedser ferry</name>
+        <styleUrl>#line-000000-1200-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            12.0987797,54.144263,0
+            12.0977498,54.1710007,0
+            11.9956112,54.4262451,0
+            11.9245996,54.5737969,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Fynshav-Bøjden ferry</name>
+        <styleUrl>#line-000000-1200-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            9.9836265,54.9938854,0
+            10.0811302,55.1048126,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Aarhus-Yderby ferry</name>
+        <styleUrl>#line-000000-1200-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            10.2529134,56.1525041,0
+            10.2558376,56.1549689,0
+            10.2617663,56.1564296,0
+            10.6271352,56.0414332,0
+            11.2966146,55.9692573,0
+            11.2996616,55.9746068,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Hou-Saelvig ferry</name>
+        <styleUrl>#line-000000-1200-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            10.2599613,55.9121941,0
+            10.2973834,55.9285464,0
+            10.549039,55.8640594,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Puttgaden-Rødby ferry</name>
+        <styleUrl>#line-000000-1200-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            11.228093,54.5026614,0
+            11.3508666,54.6543977,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Stavanger-Bergen ferry</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.5830696,58.9214957,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bergen fast boat port</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.3203254,60.3959548,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Bergen ferry port</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.3066216,60.3916932,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Solvorn-Ornes ferry</name>
+        <description>Added 24.10.2025</description>
+        <styleUrl>#icon-1569-0F9D58</styleUrl>
+        <Point>
+          <coordinates>
+            7.2828017,61.2988845,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Strömstad-Sandefjord</name>
+        <styleUrl>#icon-1898-FF5252-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            11.0425605,58.961096,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hjelmeland-Nesvik-Ombo</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.1608033,59.2388214,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Lysebotn-Forsand</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.633529,59.0524988,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sulesund-Hareid</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            6.1107964,62.386074,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Årvika-Koparnes</name>
+        <styleUrl>#icon-1569-0F9D58-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            5.6464918,62.1821731,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

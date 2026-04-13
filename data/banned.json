@@ -1,0 +1,15 @@
+[
+  { "name": "Laerdalstunnelen", "lat": 60.9768, "lng": 7.3851, "r": 300, "type": "tunnel" },
+  { "name": "Gudvangatunnelen", "lat": 60.8859, "lng": 6.9394, "r": 300, "type": "tunnel" },
+  { "name": "Innfjordtunnelen", "lat": 62.5302, "lng": 7.6128, "r": 300, "type": "tunnel" },
+  { "name": "Kvivstunnelen", "lat": 61.9984, "lng": 6.4964, "r": 300, "type": "tunnel" },
+  { "name": "Oslofjordtunnelen", "lat": 59.453, "lng": 10.554, "r": 400, "type": "tunnel" },
+
+  { "name": "E39 Vassenden–Skei", "lat": 61.52, "lng": 6.29, "r": 500, "type": "road" },
+  { "name": "E6 Sel–Dombås", "lat": 61.9, "lng": 9.38, "r": 500, "type": "road" },
+
+  { "name": "Hirtshals ferries", "lat": 57.6714, "lng": 9.8415, "r": 400, "type": "ferry" },
+  { "name": "Göteborg ferries", "lat": 57.5973, "lng": 11.617, "r": 400, "type": "ferry" },
+  { "name": "Ystad ferries", "lat": 55.3678, "lng": 13.8583, "r": 400, "type": "ferry" },
+  { "name": "Storebaeltsbroen", "lat": 55.3341, "lng": 10.9788, "r": 400, "type": "ferry" }
+]
