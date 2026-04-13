@@ -99,8 +99,8 @@ function RouteMap({
 
   const poiMarkers = useMemo(
     () =>
-      pois.map((p, i) => ({
-        key: `${p.type}-${p.lat}-${p.lng}-${i}`,
+      pois.map((p) => ({
+        key: p.id,
         coordinate: { latitude: p.lat, longitude: p.lng },
         title: p.name || p.type,
       })),
@@ -139,7 +139,7 @@ function RouteMap({
   const kmlLines = useMemo(() => kmlOverlay?.lines ?? [], [kmlOverlay]);
 
   const kmlPoints = useMemo(
-    () => (showKmlPoints ? kmlOverlay?.points ?? [] : []),
+    () => (showKmlPoints ? (kmlOverlay?.points ?? []).slice(0, 50) : []),
     [kmlOverlay, showKmlPoints]
   );
 

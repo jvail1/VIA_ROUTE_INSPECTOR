@@ -10,6 +10,10 @@ export type Poi = {
   source: 'curated' | 'overpass';
 };
 
+export type EnrichedPoi = Poi & {
+  routeDistanceM: number;
+};
+
 function decodeXml(value: string) {
   return value
     .replace(/&lt;/g, '<')

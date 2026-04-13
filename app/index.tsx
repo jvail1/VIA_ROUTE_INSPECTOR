@@ -17,8 +17,9 @@ import { Asset } from 'expo-asset';
 import { inspectRoute } from '../logic/inspectRoute';
 import { parseGpx } from '../logic/gpx';
 import RouteMap from '../components/RouteMap';
-import { minDistanceToRouteMeters } from '../logic/routeDistance';
 import { parseCuratedPoiGpx, type Poi } from '../logic/curatedPois';
+import { minDistanceToRouteMeters } from '../logic/routeDistance';
+import { decimatePolyline } from '../logic/decimate';
 import { fetchLivePois } from '../logic/livePois';
 import { mergePois } from '../logic/mergePois';
 import {
@@ -50,6 +51,14 @@ const RADII = [
   { label: '5 km', value: 5000 },
   { label: '10 km', value: 10000 },
 ];
+
+// Decimate route for caching — converts lat/lng ↔ latitude/longitude for RDP.
+// Reduces 40k points to ~500–2000, safe to store and restore without memory pressure.
+function decimateRoute(points: RoutePoint[]): RoutePoint[] {
+  const converted = points.map((p) => ({ latitude: p.lat, longitude: p.lng }));
+  const reduced = decimatePolyline(converted);
+  return reduced.map((p) => ({ lat: p.latitude, lng: p.longitude }));
+}
 
 function routeBounds(points: RoutePoint[]) {
   let minLat = points[0].lat;
@@ -135,7 +144,9 @@ export default function HomeScreen() {
         if (cachedRoute) {
           setFileName(cachedRoute.fileName || 'Cached route');
           setPointCount(cachedRoute.pointCount || 0);
-          setPoints(cachedRoute.points || []);
+          const cachedPoints = cachedRoute.points || [];
+          // Decimate on restore in case cache holds a pre-decimation full-res route
+          setPoints(cachedPoints.length > 3000 ? decimateRoute(cachedPoints) : cachedPoints);
           setResult(cachedRoute.result || null);
         }
 
@@ -203,25 +214,41 @@ export default function HomeScreen() {
       }
 
       const xml = await FileSystem.readAsStringAsync(asset.uri);
+      console.log('GPX read, size:', xml.length);
+
+      // Yield so previous render completes and GC can run before heavy sync work
+      await new Promise<void>((r) => setTimeout(r, 50));
+
       const parsedPoints = parseGpx(xml);
+      console.log('GPX parsed, points:', parsedPoints.length);
 
       if (parsedPoints.length === 0) {
         Alert.alert('No route points found', 'This GPX file does not contain track or route points.');
         return;
       }
 
+      // Yield between each heavy step to avoid blocking the JS thread long enough for iOS watchdog
+      await new Promise<void>((r) => setTimeout(r, 50));
       const inspection = inspectRoute(parsedPoints);
+      console.log('Inspection done, violations:', inspection.violations.length);
+
+      await new Promise<void>((r) => setTimeout(r, 50));
+      const displayPoints = decimateRoute(parsedPoints);
+      console.log('Decimated to:', displayPoints.length);
+
+      // Yield again before state update so large intermediate arrays can be GC'd
+      await new Promise<void>((r) => setTimeout(r, 100));
 
       setFileName(asset.name || 'Imported GPX');
       setPointCount(parsedPoints.length);
-      setPoints(parsedPoints);
+      setPoints(displayPoints);
       setResult(inspection);
       setLivePois([]);
 
       await saveRouteState({
         fileName: asset.name || 'Imported GPX',
         pointCount: parsedPoints.length,
-        points: parsedPoints,
+        points: displayPoints,
         result: inspection,
       });
 
@@ -241,9 +268,7 @@ export default function HomeScreen() {
 
     try {
       const bounds = routeBounds(points);
-      const fetched = await fetchLivePois(bounds, (done, total) => {
-  	console.log(`Live POIs progress ${done}/${total}`);
-	});
+      const fetched = await fetchLivePois(bounds);
       setLivePois(fetched);
       setUseLivePois(true);
       Alert.alert('Live POIs updated', `${fetched.length} live POIs loaded.`);
@@ -259,7 +284,6 @@ export default function HomeScreen() {
 
   const visiblePoiCount = useMemo(() => {
     if (!points.length) return 0;
-
     return mergedPois.filter((p) => {
       if (p.type === 'water' && !showWater) return false;
       if (p.type === 'camp' && !showCamp) return false;

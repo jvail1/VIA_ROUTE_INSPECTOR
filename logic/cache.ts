@@ -41,7 +41,14 @@ export async function saveRouteState(value: CachedRouteState) {
 
 export async function loadRouteState(): Promise<CachedRouteState | null> {
   const raw = await AsyncStorage.getItem(KEYS.routeState);
-  return raw ? JSON.parse(raw) : null;
+  if (!raw) return null;
+  // Skip parsing if the stored route is very large (pre-decimation cache).
+  // ~200 KB ≈ 5k points — anything larger is a full-res route that would crash on restore.
+  if (raw.length > 200_000) {
+    await AsyncStorage.removeItem(KEYS.routeState);
+    return null;
+  }
+  return JSON.parse(raw);
 }
 
 export async function saveLivePois(value: any[]) {
