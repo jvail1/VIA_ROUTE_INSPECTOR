@@ -113,12 +113,10 @@ function buildTiles(bounds: Bounds): Bounds[] {
 
   if (latSpan <= 0 || lngSpan <= 0) return [];
 
-  // Small enough: one query only
   if (latSpan <= 0.8 && lngSpan <= 0.8) {
     return [{ minLat: south, minLng: west, maxLat: north, maxLng: east }];
   }
 
-  // Moderately large: split in 2 by longest side
   if (latSpan <= 1.6 && lngSpan <= 1.6) {
     if (latSpan >= lngSpan) {
       const mid = south + latSpan / 2;
@@ -135,7 +133,6 @@ function buildTiles(bounds: Bounds): Bounds[] {
     ];
   }
 
-  // Large: split into 4 quadrants
   const midLat = south + latSpan / 2;
   const midLng = west + lngSpan / 2;
 
@@ -147,7 +144,15 @@ function buildTiles(bounds: Bounds): Bounds[] {
   ];
 }
 
-export async function fetchLivePois(bounds: Bounds): Promise<Poi[]> {
+type FetchLivePoisOptions = {
+  onProgress?: (done: number, total: number) => void;
+  onTilePois?: (tilePois: Poi[], done: number, total: number) => void;
+};
+
+export async function fetchLivePois(
+  bounds: Bounds,
+  options: FetchLivePoisOptions = {}
+): Promise<Poi[]> {
   const south = Math.min(bounds.minLat, bounds.maxLat);
   const north = Math.max(bounds.minLat, bounds.maxLat);
   const west = Math.min(bounds.minLng, bounds.maxLng);
@@ -169,37 +174,43 @@ export async function fetchLivePois(bounds: Bounds): Promise<Poi[]> {
   }
 
   const tiles = buildTiles({ minLat: south, minLng: west, maxLat: north, maxLng: east });
-  console.log('Fetching live POIs across tiles', tiles.length);
+  const total = tiles.length;
 
-  const allPois: Poi[] = [];
+  console.log('Fetching live POIs across tiles', total);
 
-  for (const tile of tiles) {
+  let completed = 0;
+
+  const promises = tiles.map(async (tile, idx) => {
     const tSouth = Math.min(tile.minLat, tile.maxLat);
     const tNorth = Math.max(tile.minLat, tile.maxLat);
     const tWest = Math.min(tile.minLng, tile.maxLng);
     const tEast = Math.max(tile.minLng, tile.maxLng);
 
-    console.log('Fetching live POI tile', {
-      south: tSouth,
-      west: tWest,
-      north: tNorth,
-      east: tEast,
-    });
-
     try {
       const query = buildQuery(tSouth, tWest, tNorth, tEast);
       const data = await fetchOverpass(query);
-      const pois = (data?.elements || [])
-        .map(normalizePoi)
-        .filter(Boolean) as Poi[];
 
-      allPois.push(...pois);
+      const tilePois = dedupePois(
+        ((data?.elements || []).map(normalizePoi).filter(Boolean) as Poi[])
+      );
+
+      completed++;
+      options.onTilePois?.(tilePois, completed, total);
+      options.onProgress?.(completed, total);
+
+      return tilePois;
     } catch (err) {
-      console.log('Live POI tile failed', String(err));
+      console.log('Live POI tile failed', idx, String(err));
+      completed++;
+      options.onTilePois?.([], completed, total);
+      options.onProgress?.(completed, total);
+      return [];
     }
-  }
+  });
 
-  const merged = dedupePois(allPois);
+  const results = await Promise.all(promises);
+  const merged = dedupePois(results.flat());
+
   console.log('Live POIs merged total', merged.length);
 
   return merged;

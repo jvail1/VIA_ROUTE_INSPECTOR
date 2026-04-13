@@ -234,7 +234,9 @@ export default function HomeScreen() {
 
     try {
       const bounds = routeBounds(points);
-      const fetched = await fetchLivePois(bounds);
+      const fetched = await fetchLivePois(bounds, (done, total) => {
+  	console.log(`Live POIs progress ${done}/${total}`);
+	});
       setLivePois(fetched);
       setUseLivePois(true);
       Alert.alert('Live POIs updated', `${fetched.length} live POIs loaded.`);
