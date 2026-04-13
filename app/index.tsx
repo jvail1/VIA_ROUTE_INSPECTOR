@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
+  ActivityIndicator,
   Alert,
   Button,
   Pressable,
@@ -77,6 +78,8 @@ export default function HomeScreen() {
   const [points, setPoints] = useState<RoutePoint[]>([]);
   const [result, setResult] = useState<InspectionResult | null>(null);
   const [selectedMapTarget, setSelectedMapTarget] = useState<{ lat: number; lng: number; label?: string; ts?: number } | null>(null);
+
+  const [isLoadingImport, setIsLoadingImport] = useState(false);
 
   const [showWater, setShowWater] = useState(true);
   const [showCamp, setShowCamp] = useState(true);
@@ -183,6 +186,7 @@ export default function HomeScreen() {
   ]);
 
   async function importGpx() {
+    setIsLoadingImport(true);
     try {
       const picked = await DocumentPicker.getDocumentAsync({
         type: ['application/gpx+xml', 'text/xml', 'application/xml', '*/*'],
@@ -224,6 +228,8 @@ export default function HomeScreen() {
       await saveCachedLivePois([]);
     } catch (error: any) {
       Alert.alert('Import failed', error?.message || 'Unknown error');
+    } finally {
+      setIsLoadingImport(false);
     }
   }
 
@@ -285,7 +291,13 @@ export default function HomeScreen() {
           <Text style={styles.subtitle}>Offline GPX route check</Text>
 
           <View style={styles.buttonWrap}>
-            <Button title="Import GPX" onPress={importGpx} />
+            <Button title="Import GPX" onPress={importGpx} disabled={isLoadingImport} />
+            {isLoadingImport && (
+              <View style={styles.importingRow}>
+                <ActivityIndicator size="small" color="#1f6feb" />
+                <Text style={styles.importingText}>Parsing route…</Text>
+              </View>
+            )}
           </View>
 
           <View style={styles.buttonWrap}>
@@ -435,17 +447,6 @@ export default function HomeScreen() {
                 </>
               )}
 
-              {result.gatesMissed.length > 0 && (
-                <>
-                  <Text style={styles.section}>Missed Gates</Text>
-                  {result.gatesMissed.map((g, i) => (
-                    <View key={`${g.id}-${i}`} style={styles.row}>
-                      <Text style={styles.rowTitle}>{g.name}</Text>
-                      <Text style={styles.rowMeta}>closest approach: {g.closest}m</Text>
-                    </View>
-                  ))}
-                </>
-              )}
             </>
           )}
         </View>
@@ -562,5 +563,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     marginTop: 2,
+  },
+  importingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: 8,
+  },
+  importingText: {
+    fontSize: 13,
+    color: '#666',
   },
 });
