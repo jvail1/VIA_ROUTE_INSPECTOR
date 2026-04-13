@@ -89,6 +89,64 @@ async function fetchOverpass(query: string): Promise<any> {
   throw lastError || new Error('All Overpass endpoints failed');
 }
 
+function buildQuery(south: number, west: number, north: number, east: number): string {
+  return `
+    [out:json][timeout:25];
+    (
+      node["tourism"="camp_site"](${south},${west},${north},${east});
+      node["amenity"="drinking_water"](${south},${west},${north},${east});
+      node["amenity"="toilets"](${south},${west},${north},${east});
+      node["amenity"="shower"](${south},${west},${north},${east});
+    );
+    out body;
+  `.trim();
+}
+
+function buildTiles(bounds: Bounds): Bounds[] {
+  const south = Math.min(bounds.minLat, bounds.maxLat);
+  const north = Math.max(bounds.minLat, bounds.maxLat);
+  const west = Math.min(bounds.minLng, bounds.maxLng);
+  const east = Math.max(bounds.minLng, bounds.maxLng);
+
+  const latSpan = north - south;
+  const lngSpan = east - west;
+
+  if (latSpan <= 0 || lngSpan <= 0) return [];
+
+  // Small enough: one query only
+  if (latSpan <= 0.8 && lngSpan <= 0.8) {
+    return [{ minLat: south, minLng: west, maxLat: north, maxLng: east }];
+  }
+
+  // Moderately large: split in 2 by longest side
+  if (latSpan <= 1.6 && lngSpan <= 1.6) {
+    if (latSpan >= lngSpan) {
+      const mid = south + latSpan / 2;
+      return [
+        { minLat: south, minLng: west, maxLat: mid, maxLng: east },
+        { minLat: mid, minLng: west, maxLat: north, maxLng: east },
+      ];
+    }
+
+    const mid = west + lngSpan / 2;
+    return [
+      { minLat: south, minLng: west, maxLat: north, maxLng: mid },
+      { minLat: south, minLng: mid, maxLat: north, maxLng: east },
+    ];
+  }
+
+  // Large: split into 4 quadrants
+  const midLat = south + latSpan / 2;
+  const midLng = west + lngSpan / 2;
+
+  return [
+    { minLat: south, minLng: west, maxLat: midLat, maxLng: midLng },
+    { minLat: south, minLng: midLng, maxLat: midLat, maxLng: east },
+    { minLat: midLat, minLng: west, maxLat: north, maxLng: midLng },
+    { minLat: midLat, minLng: midLng, maxLat: north, maxLng: east },
+  ];
+}
+
 export async function fetchLivePois(bounds: Bounds): Promise<Poi[]> {
   const south = Math.min(bounds.minLat, bounds.maxLat);
   const north = Math.max(bounds.minLat, bounds.maxLat);
@@ -110,25 +168,39 @@ export async function fetchLivePois(bounds: Bounds): Promise<Poi[]> {
     return [];
   }
 
-  console.log('Fetching live POIs for bbox', { south, west, north, east });
+  const tiles = buildTiles({ minLat: south, minLng: west, maxLat: north, maxLng: east });
+  console.log('Fetching live POIs across tiles', tiles.length);
 
-  const query = `
-    [out:json][timeout:25];
-    (
-      node["tourism"="camp_site"](${south},${west},${north},${east});
-      node["amenity"="drinking_water"](${south},${west},${north},${east});
-      node["amenity"="toilets"](${south},${west},${north},${east});
-      node["amenity"="shower"](${south},${west},${north},${east});
-    );
-    out body;
-  `.trim();
+  const allPois: Poi[] = [];
 
-  const data = await fetchOverpass(query);
-  const pois = (data?.elements || [])
-    .map(normalizePoi)
-    .filter(Boolean) as Poi[];
+  for (const tile of tiles) {
+    const tSouth = Math.min(tile.minLat, tile.maxLat);
+    const tNorth = Math.max(tile.minLat, tile.maxLat);
+    const tWest = Math.min(tile.minLng, tile.maxLng);
+    const tEast = Math.max(tile.minLng, tile.maxLng);
 
-  console.log('Live POIs merged total', pois.length);
+    console.log('Fetching live POI tile', {
+      south: tSouth,
+      west: tWest,
+      north: tNorth,
+      east: tEast,
+    });
 
-  return dedupePois(pois);
+    try {
+      const query = buildQuery(tSouth, tWest, tNorth, tEast);
+      const data = await fetchOverpass(query);
+      const pois = (data?.elements || [])
+        .map(normalizePoi)
+        .filter(Boolean) as Poi[];
+
+      allPois.push(...pois);
+    } catch (err) {
+      console.log('Live POI tile failed', String(err));
+    }
+  }
+
+  const merged = dedupePois(allPois);
+  console.log('Live POIs merged total', merged.length);
+
+  return merged;
 }
