@@ -30,6 +30,7 @@ import {
   saveUiState,
 } from '../logic/cache';
 import { parseKmlOverlay, type KmlOverlay } from '../logic/parseKmlOverlay';
+import GateWeatherCard from '../components/GateWeatherCard';
 
 type RoutePoint = {
   lat: number;
@@ -75,7 +76,7 @@ export default function HomeScreen() {
   const [pointCount, setPointCount] = useState<number>(0);
   const [points, setPoints] = useState<RoutePoint[]>([]);
   const [result, setResult] = useState<InspectionResult | null>(null);
-  const [selectedMapTarget, setSelectedMapTarget] = useState<{ lat: number; lng: number; label?: string } | null>(null);
+  const [selectedMapTarget, setSelectedMapTarget] = useState<{ lat: number; lng: number; label?: string; ts?: number } | null>(null);
 
   const [showWater, setShowWater] = useState(true);
   const [showCamp, setShowCamp] = useState(true);
@@ -262,6 +263,20 @@ export default function HomeScreen() {
     }).length;
   }, [points, mergedPois, showWater, showCamp, showToilets, showShowers, poiRadiusMeters]);
 
+  function focusItemOnMap(item: any, fallbackLabel?: string) {
+    const lat = item?.lat ?? item?.point?.lat;
+    const lng = item?.lng ?? item?.point?.lng;
+
+    if (lat == null || lng == null) return;
+
+    setSelectedMapTarget({
+      lat,
+      lng,
+      label: item?.name || fallbackLabel || 'Selected',
+      ts: Date.now(),
+    });
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
@@ -339,12 +354,8 @@ export default function HomeScreen() {
                 <RouteMap
                   points={points}
                   violations={result?.violations || []}
+                  gateHits={result?.gateHits || []}
                   pois={mergedPois}
-                  showWater={showWater}
-                  showCamp={showCamp}
-                  showToilets={showToilets}
-                  showShowers={showShowers}
-                  poiRadiusMeters={poiRadiusMeters}
                   kmlOverlay={showKmlOverlay || showKmlPoints ? kmlOverlay : null}
                   showKmlPoints={showKmlPoints}
                   focusTarget={selectedMapTarget}
@@ -373,14 +384,19 @@ export default function HomeScreen() {
                 <>
                   <Text style={styles.section}>Gate Hits</Text>
                   {result.gateHits.map((g, i) => (
-                    <Pressable
-                      key={`${g.name || 'gate-hit'}-${i}`}
-                      style={styles.row}
-                      onPress={() => focusItemOnMap(g, 'Gate hit')}
-                    >
-                      <Text style={styles.rowTitle}>{g.name || `Gate hit ${i + 1}`}</Text>
-                      <Text style={styles.rowMeta}>Tap to zoom</Text>
-                    </Pressable>
+                    <View key={`${g.name || 'gate-hit'}-${i}`} style={styles.row}>
+                      <Pressable onPress={() => focusItemOnMap(g, 'Gate hit')}>
+                        <Text style={styles.rowTitle}>{g.name || `Gate hit ${i + 1}`}</Text>
+                        <Text style={styles.rowMeta}>Tap to zoom</Text>
+                      </Pressable>
+                      <GateWeatherCard
+                        lat={g.lat}
+                        lng={g.lng}
+                        elevationM={g.elevationM}
+                        photoUrl={g.photoUrl}
+                        fetchDelay={i * 300}
+                      />
+                    </View>
                   ))}
                 </>
               )}
@@ -389,14 +405,18 @@ export default function HomeScreen() {
                 <>
                   <Text style={styles.section}>Gates Missed</Text>
                   {result.gatesMissed.map((g, i) => (
-                    <Pressable
-                      key={`${g.name || 'gate-missed'}-${i}`}
-                      style={styles.row}
-                      onPress={() => focusItemOnMap(g, 'Gate missed')}
-                    >
-                      <Text style={styles.rowTitle}>{g.name || `Gate missed ${i + 1}`}</Text>
-                      <Text style={styles.rowMeta}>Tap to zoom</Text>
-                    </Pressable>
+                    <View key={`${g.name || 'gate-missed'}-${i}`} style={styles.row}>
+                      <Pressable onPress={() => focusItemOnMap(g, 'Gate missed')}>
+                        <Text style={styles.rowTitle}>{g.name || `Gate missed ${i + 1}`}</Text>
+                        <Text style={styles.rowMeta}>closest: {g.closest}m · Tap to zoom</Text>
+                      </Pressable>
+                      <GateWeatherCard
+                        lat={g.lat}
+                        lng={g.lng}
+                        elevationM={g.elevationM}
+                        fetchDelay={i * 300}
+                      />
+                    </View>
                   ))}
                 </>
               )}
@@ -544,16 +564,3 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 });
-
-  function focusItemOnMap(item: any, fallbackLabel?: string) {
-    const lat = item?.lat ?? item?.point?.lat;
-    const lng = item?.lng ?? item?.point?.lng;
-
-    if (lat == null || lng == null) return;
-
-    setSelectedMapTarget({
-      lat,
-      lng,
-      label: item?.name || fallbackLabel || 'Selected',
-    });
-  }

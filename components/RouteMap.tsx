@@ -4,6 +4,7 @@ import MapView from 'react-native-map-clustering';
 import { Marker, Polyline } from 'react-native-maps';
 
 import type { Poi } from '../logic/curatedPois';
+import type { KmlOverlay } from '../logic/parseKmlOverlay';
 
 type RoutePoint = { lat: number; lng: number };
 
@@ -11,17 +12,22 @@ type Props = {
   points: RoutePoint[];
   pois: Poi[];
   violations: any[];
+  gateHits?: any[];
+  kmlOverlay?: KmlOverlay | null;
+  showKmlPoints?: boolean;
   focusTarget?: { lat: number; lng: number; label?: string; ts?: number } | null;
 };
 
+function kmlLineColor(kind: string): string {
+  if (kind === 'banned' || kind === 'tunnel') return '#e53935';
+  if (kind === 'ferry') return '#43a047';
+  if (kind === 'mandatory') return '#f9a825';
+  return '#757575';
+}
+
 function routeRegion(points: RoutePoint[]) {
   if (!points.length) {
-    return {
-      latitude: 56,
-      longitude: 10,
-      latitudeDelta: 4,
-      longitudeDelta: 4,
-    };
+    return { latitude: 56, longitude: 10, latitudeDelta: 4, longitudeDelta: 4 };
   }
 
   let minLat = points[0].lat;
@@ -36,18 +42,23 @@ function routeRegion(points: RoutePoint[]) {
     if (p.lng > maxLng) maxLng = p.lng;
   }
 
-  const latitude = (minLat + maxLat) / 2;
-  const longitude = (minLng + maxLng) / 2;
-
   return {
-    latitude,
-    longitude,
+    latitude: (minLat + maxLat) / 2,
+    longitude: (minLng + maxLng) / 2,
     latitudeDelta: Math.max((maxLat - minLat) * 1.25, 0.15),
     longitudeDelta: Math.max((maxLng - minLng) * 1.25, 0.15),
   };
 }
 
-function RouteMap({ points, pois, violations, focusTarget }: Props) {
+function RouteMap({
+  points,
+  pois,
+  violations,
+  gateHits = [],
+  kmlOverlay,
+  showKmlPoints,
+  focusTarget,
+}: Props) {
   const mapRef = useRef<any>(null);
 
   const initialRegion = useMemo(() => routeRegion(points), [points]);
@@ -86,14 +97,12 @@ function RouteMap({ points, pois, violations, focusTarget }: Props) {
     );
   }, [focusTarget?.ts]);
 
-  // Stable marker data
   const poiMarkers = useMemo(
     () =>
       pois.map((p, i) => ({
         key: `${p.type}-${p.lat}-${p.lng}-${i}`,
         coordinate: { latitude: p.lat, longitude: p.lng },
         title: p.name || p.type,
-        type: p.type,
       })),
     [pois]
   );
@@ -115,6 +124,25 @@ function RouteMap({ points, pois, violations, focusTarget }: Props) {
     [violations]
   );
 
+  const gateHitMarkers = useMemo(
+    () =>
+      gateHits
+        .filter((g) => typeof g.lat === 'number' && typeof g.lng === 'number')
+        .map((g, i) => ({
+          key: `gate-${g.id || i}`,
+          coordinate: { latitude: g.lat, longitude: g.lng },
+          title: g.name || `Gate ${i + 1}`,
+        })),
+    [gateHits]
+  );
+
+  const kmlLines = useMemo(() => kmlOverlay?.lines ?? [], [kmlOverlay]);
+
+  const kmlPoints = useMemo(
+    () => (showKmlPoints ? kmlOverlay?.points ?? [] : []),
+    [kmlOverlay, showKmlPoints]
+  );
+
   return (
     <View style={styles.container}>
       <MapView
@@ -128,6 +156,15 @@ function RouteMap({ points, pois, violations, focusTarget }: Props) {
         {routeCoords.length > 1 && (
           <Polyline coordinates={routeCoords} strokeWidth={4} strokeColor="#1f6feb" />
         )}
+
+        {kmlLines.map((line) => (
+          <Polyline
+            key={line.id}
+            coordinates={line.coordinates}
+            strokeWidth={3}
+            strokeColor={kmlLineColor(line.kind)}
+          />
+        ))}
 
         {poiMarkers.map((p) => (
           <Marker
@@ -145,6 +182,32 @@ function RouteMap({ points, pois, violations, focusTarget }: Props) {
             coordinate={v.coordinate}
             title={v.title}
             pinColor="red"
+            tracksViewChanges={false}
+          />
+        ))}
+
+        {gateHitMarkers.map((g) => (
+          <Marker
+            key={g.key}
+            coordinate={g.coordinate}
+            title={g.title}
+            pinColor="gold"
+            tracksViewChanges={false}
+          />
+        ))}
+
+        {kmlPoints.map((pt) => (
+          <Marker
+            key={pt.id}
+            coordinate={{ latitude: pt.latitude, longitude: pt.longitude }}
+            title={pt.name}
+            pinColor={
+              pt.kind === 'banned' || pt.kind === 'tunnel'
+                ? 'red'
+                : pt.kind === 'ferry'
+                ? 'green'
+                : 'orange'
+            }
             tracksViewChanges={false}
           />
         ))}
