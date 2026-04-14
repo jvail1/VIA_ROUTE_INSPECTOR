@@ -149,7 +149,7 @@ function buildTiles(bounds: Bounds): Bounds[] {
 
 export async function fetchLivePois(
   bounds: Bounds,
-  onTile?: (pois: Poi[]) => void
+  onTile?: (pois: Poi[], done: number, total: number) => void
 ): Promise<Poi[]> {
   const south = Math.min(bounds.minLat, bounds.maxLat);
   const north = Math.max(bounds.minLat, bounds.maxLat);
@@ -175,6 +175,7 @@ export async function fetchLivePois(
   console.log('Fetching live POIs across tiles', tiles.length);
 
   let mergedSoFar: Poi[] = [];
+  let doneCount = 0;
 
   const promises = tiles.map(async (tile, idx) => {
     const tSouth = Math.min(tile.minLat, tile.maxLat);
@@ -197,7 +198,8 @@ export async function fetchLivePois(
       );
 
       mergedSoFar = dedupePois([...mergedSoFar, ...tilePois]);
-      onTile?.(mergedSoFar);
+      doneCount++;
+      onTile?.(mergedSoFar, doneCount, tiles.length);
 
       return tilePois;
     } catch (err) {

@@ -89,6 +89,8 @@ export default function HomeScreen() {
   const [selectedMapTarget, setSelectedMapTarget] = useState<{ lat: number; lng: number; label?: string; ts?: number } | null>(null);
 
   const [isLoadingImport, setIsLoadingImport] = useState(false);
+  const [isLoadingLivePois, setIsLoadingLivePois] = useState(false);
+  const [livePoiStatus, setLivePoiStatus] = useState<string | null>(null);
 
   const [showWater, setShowWater] = useState(true);
   const [showCamp, setShowCamp] = useState(true);
@@ -266,14 +268,23 @@ export default function HomeScreen() {
       return;
     }
 
+    setIsLoadingLivePois(true);
+    setLivePoiStatus('Starting…');
+
     try {
       const bounds = routeBounds(points);
-      const fetched = await fetchLivePois(bounds);
+      const fetched = await fetchLivePois(bounds, (pois, done, total) => {
+        setLivePoiStatus(`Tile ${done}/${total} — ${pois.length} POIs found`);
+      });
       setLivePois(fetched);
       setUseLivePois(true);
+      setLivePoiStatus(null);
       Alert.alert('Live POIs updated', `${fetched.length} live POIs loaded.`);
     } catch (error: any) {
+      setLivePoiStatus(null);
       Alert.alert('Live update failed', error?.message || 'Unknown error');
+    } finally {
+      setIsLoadingLivePois(false);
     }
   }
 
@@ -325,7 +336,13 @@ export default function HomeScreen() {
           </View>
 
           <View style={styles.buttonWrap}>
-            <Button title="Load Live POIs Near Route" onPress={refreshLivePois} />
+            <Button title="Load Live POIs Near Route" onPress={refreshLivePois} disabled={isLoadingLivePois} />
+            {isLoadingLivePois && (
+              <View style={styles.importingRow}>
+                <ActivityIndicator size="small" color="#1f6feb" />
+                <Text style={styles.importingText}>{livePoiStatus}</Text>
+              </View>
+            )}
           </View>
 
           <View style={styles.buttonWrap}>
@@ -391,7 +408,7 @@ export default function HomeScreen() {
                   points={points}
                   violations={result?.violations || []}
                   gateHits={result?.gateHits || []}
-                  pois={mergedPois}
+                  pois={mergedPois.slice(0, 300)}
                   kmlOverlay={showKmlOverlay || showKmlPoints ? kmlOverlay : null}
                   showKmlPoints={showKmlPoints}
                   focusTarget={selectedMapTarget}
