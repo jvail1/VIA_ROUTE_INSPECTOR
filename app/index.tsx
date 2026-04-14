@@ -76,6 +76,7 @@ const RADII = [
   { label: '5 km', value: 5000 },
   { label: '10 km', value: 10000 },
 ];
+const MAX_MAP_POIS = 300;
 
 // Decimate route for caching — converts lat/lng ↔ latitude/longitude for RDP.
 // Reduces 40k points to ~500–2000, safe to store and restore without memory pressure.
@@ -326,6 +327,11 @@ export default function HomeScreen() {
     );
   }, [points]);
 
+  const gateMissedById = useMemo(
+    () => new Map(result?.gatesMissed.map((g: any) => [g.id, g.closest]) || []),
+    [result]
+  );
+
   const mergedPois = useMemo(
     () => mergePois(curatedPois, useLivePois ? livePois : []),
     [curatedPois, livePois, useLivePois]
@@ -342,19 +348,17 @@ export default function HomeScreen() {
     }).length;
   }, [points, mergedPois, showWater, showCamp, showToilets, showShowers, poiRadiusMeters]);
 
-  function focusItemOnMap(item: any, fallbackLabel?: string) {
-    const lat = item?.lat ?? item?.point?.lat;
-    const lng = item?.lng ?? item?.point?.lng;
+  const mapPois = useMemo(() => {
+    if (!points.length) return [];
 
-    if (lat == null || lng == null) return;
-
-    setSelectedMapTarget({
-      lat,
-      lng,
-      label: item?.name || fallbackLabel || 'Selected',
-      ts: Date.now(),
-    });
-  }
+    return mergedPois.filter((p) => {
+      if (p.type === 'water' && !showWater) return false;
+      if (p.type === 'camp' && !showCamp) return false;
+      if (p.type === 'toilet' && !showToilets) return false;
+      if (p.type === 'shower' && !showShowers) return false;
+      return minDistanceToRouteMeters(points, p) <= poiRadiusMeters;
+    }).slice(0, MAX_MAP_POIS);
+  }, [points, mergedPois, showWater, showCamp, showToilets, showShowers, poiRadiusMeters]);
 
   async function shareResults() {
     if (!result) return;
@@ -469,6 +473,7 @@ export default function HomeScreen() {
               <Text style={styles.value}>Curated POIs: {curatedPois.length}</Text>
               <Text style={styles.value}>Live POIs: {livePois.length}</Text>
               <Text style={styles.value}>Visible POIs: {visiblePoiCount}</Text>
+              <Text style={styles.value}>Map markers shown: {mapPois.length}</Text>
               <Text style={styles.value}>Hazard lines: {kmlOverlay?.lines?.length || 0}</Text>
               <Text style={styles.value}>Hazard points: {kmlOverlay?.points?.length || 0}</Text>
 
@@ -477,7 +482,7 @@ export default function HomeScreen() {
                   points={points}
                   violations={result?.violations || []}
                   gateHits={result?.gateHits || []}
-                  pois={mergedPois.slice(0, 300)}
+                  pois={mapPois}
                   kmlOverlay={showKmlOverlay || showKmlPoints ? kmlOverlay : null}
                   showKmlPoints={showKmlPoints}
                   focusTarget={selectedMapTarget}
@@ -504,92 +509,55 @@ export default function HomeScreen() {
               <Text style={styles.value}>{result.violations.length}</Text>
 
               {/* Gate progress tracker */}
-              <Text style={styles.section}>Gate Progress</Text>
+              <Text style={styles.section}>Gates</Text>
               <Text style={styles.gateProgressSummary}>
                 {result.gateHits.length} / {gatesData.length} gates hit
               </Text>
               <View style={styles.gateProgressList}>
                 {(() => {
                   const hitIds = new Set(result.gateHits.map((g: any) => g.id));
-                  return gatesData.map((g) => {
+                  return gatesData.map((g, i) => {
                     const hit = hitIds.has(g.id);
                     const distKm = gateDistancesKm.get(g.id);
+                    const closestM = gateMissedById.get(g.id);
+
                     return (
                       <Pressable
                         key={g.id}
-                        style={styles.gateProgressRow}
+                        style={styles.row}
                         onPress={() => setSelectedGateDetail(g)}
                       >
-                        <Text style={hit ? styles.gateProgressHit : styles.gateProgressMiss}>
-                          {hit ? '✓' : '✗'}
+                        <View style={styles.gateProgressRow}>
+                          <Text style={hit ? styles.gateProgressHit : styles.gateProgressMiss}>
+                            {hit ? '✓' : '✗'}
+                          </Text>
+                          <Text style={styles.gateProgressName}>
+                            {g.name}
+                          </Text>
+                          {distKm != null && (
+                            <Text style={styles.gateProgressDist}>{distKm} km</Text>
+                          )}
+                        </View>
+                        <Text style={styles.rowMeta}>
+                          {hit
+                            ? 'Hit'
+                            : closestM != null
+                              ? `${closestM} m from route`
+                              : 'Missed'}{' '}
+                          · Tap for details
                         </Text>
-                        <Text style={styles.gateProgressName} numberOfLines={1}>
-                          {g.name}
-                        </Text>
-                        {distKm != null && (
-                          <Text style={styles.gateProgressDist}>{distKm} km</Text>
-                        )}
+                        <GateWeatherCard
+                          lat={g.lat}
+                          lng={g.lng}
+                          elevationM={g.elevationM}
+                          photoUrl={g.photoUrl}
+                          fetchDelay={i * 300}
+                        />
                       </Pressable>
                     );
                   });
                 })()}
               </View>
-
-              {/* Ferry pre-booking alerts */}
-              <Text style={styles.section}>Ferry Pre-Booking Required</Text>
-              <View style={styles.ferryAlertBox}>
-                <Text style={styles.ferryAlertTitle}>⛴ Gate IV — Lysebotn</Text>
-                <Text style={styles.ferryAlertBody}>
-                  Only accessible by ferry from Lauvvik or Forsand. Limited capacity — must be pre-booked before the race.
-                </Text>
-              </View>
-              <View style={[styles.ferryAlertBox, styles.ferryAlertBoxSpaced]}>
-                <Text style={styles.ferryAlertTitle}>⛴ Gate X — Urnes (Solvorn–Ornes ferry)</Text>
-                <Text style={styles.ferryAlertBody}>
-                  The Solvorn–Ornes ferry crosses Lustrafjord to reach Urnes Stave Church. Pre-book to guarantee passage.
-                </Text>
-              </View>
-
-              {result.gateHits.length > 0 && (
-                <>
-                  <Text style={styles.section}>Gate Hits</Text>
-                  {result.gateHits.map((g, i) => (
-                    <View key={`${g.name || 'gate-hit'}-${i}`} style={styles.row}>
-                      <Pressable onPress={() => focusItemOnMap(g, 'Gate hit')}>
-                        <Text style={styles.rowTitle}>{g.name || `Gate hit ${i + 1}`}</Text>
-                        <Text style={styles.rowMeta}>Tap to zoom</Text>
-                      </Pressable>
-                      <GateWeatherCard
-                        lat={g.lat}
-                        lng={g.lng}
-                        elevationM={g.elevationM}
-                        photoUrl={g.photoUrl}
-                        fetchDelay={i * 300}
-                      />
-                    </View>
-                  ))}
-                </>
-              )}
-
-              {result.gatesMissed.length > 0 && (
-                <>
-                  <Text style={styles.section}>Gates Missed</Text>
-                  {result.gatesMissed.map((g, i) => (
-                    <View key={`${g.name || 'gate-missed'}-${i}`} style={styles.row}>
-                      <Pressable onPress={() => focusItemOnMap(g, 'Gate missed')}>
-                        <Text style={styles.rowTitle}>{g.name || `Gate missed ${i + 1}`}</Text>
-                        <Text style={styles.rowMeta}>Tap to zoom</Text>
-                      </Pressable>
-                      <GateWeatherCard
-                        lat={g.lat}
-                        lng={g.lng}
-                        elevationM={g.elevationM}
-                        fetchDelay={i * 300}
-                      />
-                    </View>
-                  ))}
-                </>
-              )}
 
               {result.violations.length > 0 && (
                 <>
@@ -756,8 +724,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     paddingVertical: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0ebe3',
   },
   gateProgressHit: {
     fontSize: 16,

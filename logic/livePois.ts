@@ -31,6 +31,7 @@ function normalizePoi(el: any): Poi | null {
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
 
   return {
+    id: `live-${type}-${lat.toFixed(5)}-${lng.toFixed(5)}`,
     type,
     lat,
     lng,
@@ -40,11 +41,11 @@ function normalizePoi(el: any): Poi | null {
         ? 'Drinking water'
         : type === 'toilet'
           ? 'Toilets'
-          : type === 'camp'
-            ? 'Camp site'
-            : 'Shower'),
-    source: 'live',
-  } as Poi;
+        : type === 'camp'
+          ? 'Camp site'
+          : 'Shower'),
+    source: 'overpass',
+  };
 }
 
 function dedupePois(pois: Poi[]): Poi[] {
