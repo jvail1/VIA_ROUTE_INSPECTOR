@@ -117,7 +117,7 @@ function RouteMap({
         coordinate: { latitude: p.lat, longitude: p.lng },
         title: p.name || p.type,
         description: [
-          `${poiTypeLabel(p.type)} · ${p.source === 'curated' ? 'Curated' : 'Live'}`,
+          poiTypeLabel(p.type),
           p.notes,
           `${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}`,
         ]
