@@ -18,7 +18,7 @@ import { Asset } from 'expo-asset';
 import { inspectRoute } from '../logic/inspectRoute';
 import { parseGpx } from '../logic/gpx';
 import RouteMap from '../components/RouteMap';
-import { parseCuratedPoiGpx, type EnrichedPoi, type Poi } from '../logic/curatedPois';
+import { parseCuratedPoiGpx, type Poi } from '../logic/curatedPois';
 import { minDistanceToRouteMeters } from '../logic/routeDistance';
 import { decimatePolyline } from '../logic/decimate';
 import { fetchLivePois } from '../logic/livePois';
@@ -104,22 +104,6 @@ function routeBounds(points: RoutePoint[]) {
     maxLat: maxLat + 0.02,
     maxLng: maxLng + 0.02,
   };
-}
-
-function poiTypeVisible(
-  poi: Pick<Poi, 'type'>,
-  filters: {
-    showWater: boolean;
-    showCamp: boolean;
-    showToilets: boolean;
-    showShowers: boolean;
-  }
-) {
-  if (poi.type === 'water') return filters.showWater;
-  if (poi.type === 'camp') return filters.showCamp;
-  if (poi.type === 'toilet') return filters.showToilets;
-  if (poi.type === 'shower') return filters.showShowers;
-  return true;
 }
 
 export default function HomeScreen() {
@@ -347,22 +331,16 @@ export default function HomeScreen() {
     [curatedPois, livePois, useLivePois]
   );
 
-  const enrichedPois = useMemo<EnrichedPoi[]>(() => {
-    if (!points.length) return [];
-
-    return mergedPois.map((poi) => ({
-      ...poi,
-      routeDistanceM: minDistanceToRouteMeters(points, poi),
-    }));
-  }, [points, mergedPois]);
-
-  const visiblePois = useMemo(() => {
-    return enrichedPois.filter(
-      (poi) =>
-        poiTypeVisible(poi, { showWater, showCamp, showToilets, showShowers }) &&
-        poi.routeDistanceM <= poiRadiusMeters
-    );
-  }, [enrichedPois, showWater, showCamp, showToilets, showShowers, poiRadiusMeters]);
+  const visiblePoiCount = useMemo(() => {
+    if (!points.length) return 0;
+    return mergedPois.filter((p) => {
+      if (p.type === 'water' && !showWater) return false;
+      if (p.type === 'camp' && !showCamp) return false;
+      if (p.type === 'toilet' && !showToilets) return false;
+      if (p.type === 'shower' && !showShowers) return false;
+      return minDistanceToRouteMeters(points, p) <= poiRadiusMeters;
+    }).length;
+  }, [points, mergedPois, showWater, showCamp, showToilets, showShowers, poiRadiusMeters]);
 
   function focusItemOnMap(item: any, fallbackLabel?: string) {
     const lat = item?.lat ?? item?.point?.lat;
@@ -490,7 +468,7 @@ export default function HomeScreen() {
 
               <Text style={styles.value}>Curated POIs: {curatedPois.length}</Text>
               <Text style={styles.value}>Live POIs: {livePois.length}</Text>
-              <Text style={styles.value}>Visible POIs: {visiblePois.length}</Text>
+              <Text style={styles.value}>Visible POIs: {visiblePoiCount}</Text>
               <Text style={styles.value}>Hazard lines: {kmlOverlay?.lines?.length || 0}</Text>
               <Text style={styles.value}>Hazard points: {kmlOverlay?.points?.length || 0}</Text>
 
@@ -499,7 +477,7 @@ export default function HomeScreen() {
                   points={points}
                   violations={result?.violations || []}
                   gateHits={result?.gateHits || []}
-                  pois={visiblePois}
+                  pois={mergedPois.slice(0, 300)}
                   kmlOverlay={showKmlOverlay || showKmlPoints ? kmlOverlay : null}
                   showKmlPoints={showKmlPoints}
                   focusTarget={selectedMapTarget}
