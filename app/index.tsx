@@ -5,6 +5,7 @@ import {
   Button,
   Pressable,
   ScrollView,
+  Share,
   StyleSheet,
   Text,
   View,
@@ -33,7 +34,30 @@ import {
 } from '../logic/cache';
 import { parseKmlOverlay, type KmlOverlay } from '../logic/parseKmlOverlay';
 import GateWeatherCard from '../components/GateWeatherCard';
+import GateDetailModal from '../components/GateDetailModal';
+import { haversine } from '../logic/distance';
 import gatesData from '../data/gates.json';
+
+function buildGatesGpx(): string {
+  const wpts = gatesData
+    .map(
+      (g) =>
+        `  <wpt lat="${g.lat}" lon="${g.lng}">\n    <name>${g.name}</name>\n    <ele>${g.elevationM}</ele>\n  </wpt>`
+    )
+    .join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="VIA Route Inspector" xmlns="http://www.topografix.com/GPX/1/1">\n${wpts}\n</gpx>`;
+}
+
+async function exportGatesGpx() {
+  try {
+    const gpx = buildGatesGpx();
+    const path = FileSystem.cacheDirectory + 'VIA_Ch3_gates.gpx';
+    await FileSystem.writeAsStringAsync(path, gpx, { encoding: FileSystem.EncodingType.UTF8 });
+    await Share.share({ url: path, title: 'VIA Ch3 Gate Waypoints' });
+  } catch (e: any) {
+    Alert.alert('Export failed', e?.message || 'Unknown error');
+  }
+}
 
 type RoutePoint = {
   lat: number;
@@ -88,6 +112,8 @@ export default function HomeScreen() {
   const [points, setPoints] = useState<RoutePoint[]>([]);
   const [result, setResult] = useState<InspectionResult | null>(null);
   const [selectedMapTarget, setSelectedMapTarget] = useState<{ lat: number; lng: number; label?: string; ts?: number } | null>(null);
+
+  const [selectedGateDetail, setSelectedGateDetail] = useState<typeof gatesData[0] | null>(null);
 
   const [isLoadingImport, setIsLoadingImport] = useState(false);
   const [isLoadingLivePois, setIsLoadingLivePois] = useState(false);
@@ -289,6 +315,17 @@ export default function HomeScreen() {
     }
   }
 
+  const gateDistancesKm = useMemo(() => {
+    if (!points.length) return new Map<string, number>();
+    const last = points[points.length - 1];
+    return new Map(
+      gatesData.map((g) => [
+        g.id,
+        Math.round(haversine(last.lat, last.lng, g.lat, g.lng) / 100) / 10,
+      ])
+    );
+  }, [points]);
+
   const mergedPois = useMemo(
     () => mergePois(curatedPois, useLivePois ? livePois : []),
     [curatedPois, livePois, useLivePois]
@@ -424,6 +461,12 @@ export default function HomeScreen() {
           <Text style={styles.label}>Points parsed</Text>
           <Text style={styles.value}>{pointCount}</Text>
 
+          {points.length > 0 && (
+            <View style={styles.buttonWrap}>
+              <Button title="Export Gate Waypoints (.gpx)" onPress={exportGatesGpx} />
+            </View>
+          )}
+
           {result && (
             <>
               <Text style={styles.label}>Violations</Text>
@@ -439,11 +482,12 @@ export default function HomeScreen() {
                   const hitIds = new Set(result.gateHits.map((g: any) => g.id));
                   return gatesData.map((g) => {
                     const hit = hitIds.has(g.id);
+                    const distKm = gateDistancesKm.get(g.id);
                     return (
                       <Pressable
                         key={g.id}
                         style={styles.gateProgressRow}
-                        onPress={() => focusItemOnMap(g, g.name)}
+                        onPress={() => setSelectedGateDetail(g)}
                       >
                         <Text style={hit ? styles.gateProgressHit : styles.gateProgressMiss}>
                           {hit ? '✓' : '✗'}
@@ -451,6 +495,9 @@ export default function HomeScreen() {
                         <Text style={styles.gateProgressName} numberOfLines={1}>
                           {g.name}
                         </Text>
+                        {distKm != null && (
+                          <Text style={styles.gateProgressDist}>{distKm} km</Text>
+                        )}
                       </Pressable>
                     );
                   });
@@ -485,9 +532,7 @@ export default function HomeScreen() {
                     <View key={`${g.name || 'gate-missed'}-${i}`} style={styles.row}>
                       <Pressable onPress={() => focusItemOnMap(g, 'Gate missed')}>
                         <Text style={styles.rowTitle}>{g.name || `Gate missed ${i + 1}`}</Text>
-                        <Text style={styles.rowMeta}>
-                          {isFinite(g.closest) ? `closest: ${g.closest}m` : 'not near route'} · Tap to zoom
-                        </Text>
+                        <Text style={styles.rowMeta}>Tap to zoom</Text>
                       </Pressable>
                       <GateWeatherCard
                         lat={g.lat}
@@ -518,6 +563,16 @@ export default function HomeScreen() {
           )}
         </View>
       </ScrollView>
+
+      {selectedGateDetail && result && (
+        <GateDetailModal
+          gate={selectedGateDetail}
+          hit={result.gateHits.some((g: any) => g.id === selectedGateDetail.id)}
+          closestM={result.gatesMissed.find((g: any) => g.id === selectedGateDetail.id)?.closest}
+          distFromRouteEndKm={gateDistancesKm.get(selectedGateDetail.id)}
+          onClose={() => setSelectedGateDetail(null)}
+        />
+      )}
     </SafeAreaView>
   );
 }
@@ -676,5 +731,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#333',
     flex: 1,
+  },
+  gateProgressDist: {
+    fontSize: 13,
+    color: '#888',
+    marginLeft: 4,
   },
 });
