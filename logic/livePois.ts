@@ -20,6 +20,13 @@ function toPoiType(tags: Record<string, string>): Poi['type'] | null {
   return null;
 }
 
+function formatAddress(tags: Record<string, string>): string | null {
+  const line1 = [tags['addr:street'], tags['addr:housenumber']].filter(Boolean).join(' ').trim();
+  const line2 = [tags['addr:postcode'], tags['addr:city']].filter(Boolean).join(' ').trim();
+  const parts = [line1, line2].filter(Boolean);
+  return parts.length ? parts.join(', ') : null;
+}
+
 function normalizePoi(el: any): Poi | null {
   const tags = el?.tags || {};
   const type = toPoiType(tags);
@@ -29,6 +36,9 @@ function normalizePoi(el: any): Poi | null {
   const lng = Number(el.lon);
 
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+
+  const address = formatAddress(tags);
+  const notes = [address, tags.description || tags.note].filter(Boolean).join(' · ');
 
   return {
     id: `live-${type}-${lat.toFixed(5)}-${lng.toFixed(5)}`,
@@ -44,6 +54,7 @@ function normalizePoi(el: any): Poi | null {
         : type === 'camp'
           ? 'Camp site'
           : 'Shower'),
+    notes: notes || undefined,
     source: 'overpass',
   };
 }

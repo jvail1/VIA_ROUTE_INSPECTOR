@@ -50,6 +50,14 @@ function routeRegion(points: RoutePoint[]) {
   };
 }
 
+function poiTypeLabel(type: Poi['type']) {
+  if (type === 'water') return 'Water';
+  if (type === 'camp') return 'Camp';
+  if (type === 'toilet') return 'Toilet';
+  if (type === 'shower') return 'Shower';
+  return type;
+}
+
 function RouteMap({
   points,
   pois,
@@ -108,6 +116,13 @@ function RouteMap({
         key: p.id || `${p.type}-${p.lat}-${p.lng}`,
         coordinate: { latitude: p.lat, longitude: p.lng },
         title: p.name || p.type,
+        description: [
+          `${poiTypeLabel(p.type)} · ${p.source === 'curated' ? 'Curated' : 'Live'}`,
+          p.notes,
+          `${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}`,
+        ]
+          .filter(Boolean)
+          .join('\n'),
       })),
     [pois]
   );
@@ -176,6 +191,7 @@ function RouteMap({
             key={p.key}
             coordinate={p.coordinate}
             title={p.title}
+            description={p.description}
             pinColor="blue"
             tracksViewChanges={false}
           />
