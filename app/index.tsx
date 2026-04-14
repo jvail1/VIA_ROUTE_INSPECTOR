@@ -76,6 +76,7 @@ const RADII = [
   { label: '5 km', value: 5000 },
   { label: '10 km', value: 10000 },
 ];
+const MAX_MAP_POIS = 300;
 
 // Decimate route for caching — converts lat/lng ↔ latitude/longitude for RDP.
 // Reduces 40k points to ~500–2000, safe to store and restore without memory pressure.
@@ -358,6 +359,11 @@ export default function HomeScreen() {
     );
   }, [enrichedPois, showWater, showCamp, showToilets, showShowers, poiRadiusMeters]);
 
+  const mapPois = useMemo(
+    () => visiblePois.slice(0, MAX_MAP_POIS),
+    [visiblePois]
+  );
+
   function focusItemOnMap(item: any, fallbackLabel?: string) {
     const lat = item?.lat ?? item?.point?.lat;
     const lng = item?.lng ?? item?.point?.lng;
@@ -500,6 +506,7 @@ export default function HomeScreen() {
               <Text style={styles.value}>Curated POIs: {curatedPois.length}</Text>
               <Text style={styles.value}>Live POIs: {livePois.length}</Text>
               <Text style={styles.value}>Visible POIs: {visiblePois.length}</Text>
+              <Text style={styles.value}>Map markers shown: {mapPois.length}</Text>
               <Text style={styles.value}>Hazard lines: {kmlOverlay?.lines?.length || 0}</Text>
               <Text style={styles.value}>Hazard points: {kmlOverlay?.points?.length || 0}</Text>
 
@@ -508,7 +515,7 @@ export default function HomeScreen() {
                   points={points}
                   violations={result?.violations || []}
                   gateHits={result?.gateHits || []}
-                  pois={visiblePois}
+                  pois={mapPois}
                   kmlOverlay={showKmlOverlay || showKmlPoints ? kmlOverlay : null}
                   showKmlPoints={showKmlPoints}
                   focusTarget={selectedMapTarget}
