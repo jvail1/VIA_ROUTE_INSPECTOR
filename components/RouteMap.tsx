@@ -84,23 +84,28 @@ function RouteMap({
 
   // Focus target
   useEffect(() => {
-    if (!mapRef.current || !focusTarget) return;
+    if (!focusTarget) return;
+    if (!mapRef.current) return;
 
-    mapRef.current.animateToRegion(
-      {
-        latitude: focusTarget.lat,
-        longitude: focusTarget.lng,
-        latitudeDelta: 0.08,
-        longitudeDelta: 0.08,
-      },
-      600
-    );
+    try {
+      mapRef.current.animateToRegion(
+        {
+          latitude: focusTarget.lat,
+          longitude: focusTarget.lng,
+          latitudeDelta: 0.08,
+          longitudeDelta: 0.08,
+        },
+        600
+      );
+    } catch (e) {
+      console.log('animateToRegion failed:', e);
+    }
   }, [focusTarget?.ts]);
 
   const poiMarkers = useMemo(
     () =>
       pois.map((p) => ({
-        key: p.id,
+        key: p.id || `${p.type}-${p.lat}-${p.lng}`,
         coordinate: { latitude: p.lat, longitude: p.lng },
         title: p.name || p.type,
       })),

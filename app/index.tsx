@@ -444,7 +444,9 @@ export default function HomeScreen() {
                     <View key={`${g.name || 'gate-missed'}-${i}`} style={styles.row}>
                       <Pressable onPress={() => focusItemOnMap(g, 'Gate missed')}>
                         <Text style={styles.rowTitle}>{g.name || `Gate missed ${i + 1}`}</Text>
-                        <Text style={styles.rowMeta}>closest: {g.closest}m · Tap to zoom</Text>
+                        <Text style={styles.rowMeta}>
+                          {isFinite(g.closest) ? `closest: ${g.closest}m` : 'not near route'} · Tap to zoom
+                        </Text>
                       </Pressable>
                       <GateWeatherCard
                         lat={g.lat}
