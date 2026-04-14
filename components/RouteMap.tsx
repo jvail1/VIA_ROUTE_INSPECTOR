@@ -197,6 +197,7 @@ function RouteMap({
             coordinate={g.coordinate}
             title={g.title}
             tracksViewChanges={false}
+            cluster={false}
             zIndex={1000}
           >
             <View style={styles.gateMarker}>

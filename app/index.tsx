@@ -85,6 +85,27 @@ function decimateRoute(points: RoutePoint[]): RoutePoint[] {
   return reduced.map((p) => ({ lat: p.latitude, lng: p.longitude }));
 }
 
+function routeBounds(points: RoutePoint[]) {
+  let minLat = points[0].lat;
+  let maxLat = points[0].lat;
+  let minLng = points[0].lng;
+  let maxLng = points[0].lng;
+
+  for (const p of points) {
+    if (p.lat < minLat) minLat = p.lat;
+    if (p.lat > maxLat) maxLat = p.lat;
+    if (p.lng < minLng) minLng = p.lng;
+    if (p.lng > maxLng) maxLng = p.lng;
+  }
+
+  return {
+    minLat: minLat - 0.02,
+    minLng: minLng - 0.02,
+    maxLat: maxLat + 0.02,
+    maxLng: maxLng + 0.02,
+  };
+}
+
 function poiTypeVisible(
   poi: Pick<Poi, 'type'>,
   filters: {
@@ -113,7 +134,6 @@ export default function HomeScreen() {
   const [isLoadingImport, setIsLoadingImport] = useState(false);
   const [isLoadingLivePois, setIsLoadingLivePois] = useState(false);
   const [livePoiStatus, setLivePoiStatus] = useState<string | null>(null);
-  const [failedLivePoiTileIds, setFailedLivePoiTileIds] = useState<string[]>([]);
 
   const [showWater, setShowWater] = useState(true);
   const [showCamp, setShowCamp] = useState(true);
@@ -269,7 +289,6 @@ export default function HomeScreen() {
       setPoints(displayPoints);
       setResult(inspection);
       setLivePois([]);
-      setFailedLivePoiTileIds([]);
 
       await saveRouteState({
         fileName: asset.name || 'Imported GPX',
@@ -286,7 +305,7 @@ export default function HomeScreen() {
     }
   }
 
-  async function refreshLivePois(retryTileIds?: string[]) {
+  async function refreshLivePois() {
     if (!points.length) {
       Alert.alert('No route loaded', 'Import a GPX first.');
       return;
@@ -296,27 +315,14 @@ export default function HomeScreen() {
     setLivePoiStatus('Starting…');
 
     try {
-      const fetched = await fetchLivePois(points, {
-        retryTileIds,
-        onProgress: ({ done, total, poisFound, source }) => {
-          setLivePoiStatus(`Tile ${done}/${total} — ${poisFound} POIs found (${source})`);
-        },
+      const bounds = routeBounds(points);
+      const fetched = await fetchLivePois(bounds, (pois, done, total) => {
+        setLivePoiStatus(`Tile ${done}/${total} — ${pois.length} POIs found`);
       });
-
-      setLivePois(fetched.pois);
-      setFailedLivePoiTileIds(fetched.failedTileIds);
+      setLivePois(fetched);
       setUseLivePois(true);
-      await saveCachedLivePois(fetched.pois);
       setLivePoiStatus(null);
-
-      if (fetched.failedTileIds.length > 0) {
-        Alert.alert(
-          'Live POIs partially updated',
-          `${fetched.pois.length} live POIs loaded. ${fetched.failedTileIds.length} tile(s) failed and can be retried.`
-        );
-      } else {
-        Alert.alert('Live POIs updated', `${fetched.pois.length} live POIs loaded.`);
-      }
+      Alert.alert('Live POIs updated', `${fetched.length} live POIs loaded.`);
     } catch (error: any) {
       setLivePoiStatus(null);
       Alert.alert('Live update failed', error?.message || 'Unknown error');
@@ -421,11 +427,7 @@ export default function HomeScreen() {
           </View>
 
           <View style={styles.buttonWrap}>
-            <Button
-              title="Load Live POIs Near Route"
-              onPress={() => refreshLivePois()}
-              disabled={isLoadingLivePois}
-            />
+            <Button title="Load Live POIs Near Route" onPress={refreshLivePois} disabled={isLoadingLivePois} />
             {isLoadingLivePois && (
               <View style={styles.importingRow}>
                 <ActivityIndicator size="small" color="#1f6feb" />
@@ -434,23 +436,12 @@ export default function HomeScreen() {
             )}
           </View>
 
-          {failedLivePoiTileIds.length > 0 && (
-            <View style={styles.buttonWrap}>
-              <Button
-                title={`Retry Failed Live POI Tiles (${failedLivePoiTileIds.length})`}
-                onPress={() => refreshLivePois(failedLivePoiTileIds)}
-                disabled={isLoadingLivePois}
-              />
-            </View>
-          )}
-
           <View style={styles.buttonWrap}>
             <Button
               title="Clear Saved Cache"
               onPress={async () => {
                 await clearAllCache();
                 setLivePois([]);
-                setFailedLivePoiTileIds([]);
                 setUseLivePois(false);
                 Alert.alert('Cache cleared', 'Saved route, live POIs, and UI state were removed.');
               }}
@@ -813,26 +804,5 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#888',
     marginLeft: 4,
-  },
-  ferryAlertBox: {
-    backgroundColor: '#fff3cd',
-    borderRadius: 10,
-    padding: 14,
-    borderLeftWidth: 4,
-    borderLeftColor: '#f9a825',
-  },
-  ferryAlertBoxSpaced: {
-    marginTop: 10,
-  },
-  ferryAlertTitle: {
-    fontSize: 15,
-    fontWeight: '700',
-    color: '#7a5300',
-    marginBottom: 6,
-  },
-  ferryAlertBody: {
-    fontSize: 14,
-    color: '#7a5300',
-    lineHeight: 20,
   },
 });
