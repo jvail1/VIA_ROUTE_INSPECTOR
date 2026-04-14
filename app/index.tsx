@@ -356,6 +356,37 @@ export default function HomeScreen() {
     });
   }
 
+  async function shareResults() {
+    if (!result) return;
+    const hitNames = result.gateHits.map((g: any) => `  ✓ ${g.name}`).join('\n');
+    const missedNames = result.gatesMissed.map((g: any) => `  ✗ ${g.name}`).join('\n');
+    const violationLines = result.violations.length
+      ? result.violations.map((v: any) => `  • ${v.name} (${v.type})`).join('\n')
+      : '  None';
+
+    const lines = [
+      `VIA Chapter III — Route Inspection`,
+      `File: ${fileName}`,
+      ``,
+      `Gates: ${result.gateHits.length} / ${gatesData.length} hit`,
+      hitNames || '  (none hit)',
+      missedNames ? `\nMissed:\n${missedNames}` : '',
+      ``,
+      `Violations:`,
+      violationLines,
+      ``,
+      `⛴ Ferry pre-booking required:`,
+      `  • Gate IV (Lysebotn) — ferry from Lauvvik or Forsand`,
+      `  • Gate X (Urnes) — Solvorn–Ornes ferry`,
+    ].join('\n');
+
+    try {
+      await Share.share({ message: lines, title: 'VIA Route Inspection' });
+    } catch (e: any) {
+      Alert.alert('Share failed', e?.message || 'Unknown error');
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
@@ -502,6 +533,21 @@ export default function HomeScreen() {
                     );
                   });
                 })()}
+              </View>
+
+              {/* Ferry pre-booking alerts */}
+              <Text style={styles.section}>Ferry Pre-Booking Required</Text>
+              <View style={styles.ferryAlertBox}>
+                <Text style={styles.ferryAlertTitle}>⛴ Gate IV — Lysebotn</Text>
+                <Text style={styles.ferryAlertBody}>
+                  Only accessible by ferry from Lauvvik or Forsand. Limited capacity — must be pre-booked before the race.
+                </Text>
+              </View>
+              <View style={[styles.ferryAlertBox, styles.ferryAlertBoxSpaced]}>
+                <Text style={styles.ferryAlertTitle}>⛴ Gate X — Urnes (Solvorn–Ornes ferry)</Text>
+                <Text style={styles.ferryAlertBody}>
+                  The Solvorn–Ornes ferry crosses Lustrafjord to reach Urnes Stave Church. Pre-book to guarantee passage.
+                </Text>
               </View>
 
               {result.gateHits.length > 0 && (
