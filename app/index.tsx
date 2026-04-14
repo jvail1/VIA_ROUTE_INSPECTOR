@@ -542,8 +542,42 @@ export default function HomeScreen() {
 
           {result && (
             <>
-              <Text style={styles.label}>Violations</Text>
-              <Text style={styles.value}>{result.violations.length}</Text>
+              <Text style={styles.section}>Inspection Summary</Text>
+              <View style={styles.summaryGrid}>
+                <View style={styles.summaryCard}>
+                  <Text style={styles.summaryLabel}>Gates</Text>
+                  <Text style={styles.summaryValue}>
+                    {result.gateHits.length} / {gatesData.length}
+                  </Text>
+                </View>
+                <View style={styles.summaryCard}>
+                  <Text style={styles.summaryLabel}>Violations</Text>
+                  <Text
+                    style={[
+                      styles.summaryValue,
+                      result.violations.length > 0 ? styles.summaryValueBad : styles.summaryValueGood,
+                    ]}
+                  >
+                    {result.violations.length}
+                  </Text>
+                </View>
+                <View style={styles.summaryCard}>
+                  <Text style={styles.summaryLabel}>Live POIs</Text>
+                  <Text style={styles.summaryValue}>
+                    {useLivePois ? livePois.length : 0}
+                  </Text>
+                </View>
+                <View style={styles.summaryCard}>
+                  <Text style={styles.summaryLabel}>Visible POIs</Text>
+                  <Text style={styles.summaryValue}>{visiblePoiCount}</Text>
+                </View>
+              </View>
+
+              <View style={styles.summaryNoteBox}>
+                <Text style={styles.summaryNoteText}>
+                  Ferry planning: Gate IV Lysebotn and Gate X Urnes may require advance ferry planning.
+                </Text>
+              </View>
 
               {/* Gate progress tracker */}
               <Text style={styles.section}>Gates</Text>
@@ -785,5 +819,46 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#888',
     marginLeft: 4,
+  },
+  summaryGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+    marginBottom: 12,
+  },
+  summaryCard: {
+    flexBasis: '48%',
+    backgroundColor: '#f7f3ec',
+    borderRadius: 10,
+    padding: 14,
+  },
+  summaryLabel: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#666',
+    textTransform: 'uppercase',
+    marginBottom: 4,
+  },
+  summaryValue: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#111',
+  },
+  summaryValueGood: {
+    color: '#2f7d32',
+  },
+  summaryValueBad: {
+    color: '#c62828',
+  },
+  summaryNoteBox: {
+    backgroundColor: '#fff3cd',
+    borderRadius: 10,
+    padding: 14,
+    marginBottom: 6,
+  },
+  summaryNoteText: {
+    fontSize: 14,
+    color: '#7a5300',
+    lineHeight: 20,
   },
 });
