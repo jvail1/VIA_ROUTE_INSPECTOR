@@ -76,7 +76,7 @@ const RADII = [
   { label: '5 km', value: 5000 },
   { label: '10 km', value: 10000 },
 ];
-const MAX_MAP_POIS = 300;
+const MAX_MAP_POIS = 100;
 
 // Decimate route for caching — converts lat/lng ↔ latitude/longitude for RDP.
 // Reduces 40k points to ~500–2000, safe to store and restore without memory pressure.
@@ -351,14 +351,50 @@ export default function HomeScreen() {
   const mapPois = useMemo(() => {
     if (!points.length) return [];
 
-    return mergedPois.filter((p) => {
-      if (p.type === 'water' && !showWater) return false;
-      if (p.type === 'camp' && !showCamp) return false;
-      if (p.type === 'toilet' && !showToilets) return false;
-      if (p.type === 'shower' && !showShowers) return false;
-      return minDistanceToRouteMeters(points, p) <= poiRadiusMeters;
-    }).slice(0, MAX_MAP_POIS);
+    return mergedPois
+      .map((p) => ({
+        poi: p,
+        routeDistanceM: minDistanceToRouteMeters(points, p),
+      }))
+      .filter(({ poi, routeDistanceM }) => {
+        if (poi.type === 'water' && !showWater) return false;
+        if (poi.type === 'camp' && !showCamp) return false;
+        if (poi.type === 'toilet' && !showToilets) return false;
+        if (poi.type === 'shower' && !showShowers) return false;
+        return routeDistanceM <= poiRadiusMeters;
+      })
+      .sort((a, b) => a.routeDistanceM - b.routeDistanceM)
+      .slice(0, MAX_MAP_POIS)
+      .map(({ poi }) => poi);
   }, [points, mergedPois, showWater, showCamp, showToilets, showShowers, poiRadiusMeters]);
+
+  const routeMapKey = useMemo(
+    () =>
+      [
+        points.length,
+        useLivePois ? 1 : 0,
+        showWater ? 1 : 0,
+        showCamp ? 1 : 0,
+        showToilets ? 1 : 0,
+        showShowers ? 1 : 0,
+        poiRadiusMeters,
+        showKmlOverlay ? 1 : 0,
+        showKmlPoints ? 1 : 0,
+        mapPois.length,
+      ].join(':'),
+    [
+      points.length,
+      useLivePois,
+      showWater,
+      showCamp,
+      showToilets,
+      showShowers,
+      poiRadiusMeters,
+      showKmlOverlay,
+      showKmlPoints,
+      mapPois.length,
+    ]
+  );
 
   async function shareResults() {
     if (!result) return;
@@ -479,6 +515,7 @@ export default function HomeScreen() {
 
               <View style={styles.mapWrap}>
                 <RouteMap
+                  key={routeMapKey}
                   points={points}
                   violations={result?.violations || []}
                   gateHits={result?.gateHits || []}
