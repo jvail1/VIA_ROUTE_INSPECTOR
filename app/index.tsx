@@ -33,6 +33,7 @@ import {
 } from '../logic/cache';
 import { parseKmlOverlay, type KmlOverlay } from '../logic/parseKmlOverlay';
 import GateWeatherCard from '../components/GateWeatherCard';
+import gatesData from '../data/gates.json';
 
 type RoutePoint = {
   lat: number;
@@ -428,11 +429,34 @@ export default function HomeScreen() {
               <Text style={styles.label}>Violations</Text>
               <Text style={styles.value}>{result.violations.length}</Text>
 
-              <Text style={styles.label}>Gates hit</Text>
-              <Text style={styles.value}>{result.gateHits.length}</Text>
+              {/* Gate progress tracker */}
+              <Text style={styles.section}>Gate Progress</Text>
+              <Text style={styles.gateProgressSummary}>
+                {result.gateHits.length} / {gatesData.length} gates hit
+              </Text>
+              <View style={styles.gateProgressList}>
+                {(() => {
+                  const hitIds = new Set(result.gateHits.map((g: any) => g.id));
+                  return gatesData.map((g) => {
+                    const hit = hitIds.has(g.id);
+                    return (
+                      <Pressable
+                        key={g.id}
+                        style={styles.gateProgressRow}
+                        onPress={() => focusItemOnMap(g, g.name)}
+                      >
+                        <Text style={hit ? styles.gateProgressHit : styles.gateProgressMiss}>
+                          {hit ? '✓' : '✗'}
+                        </Text>
+                        <Text style={styles.gateProgressName} numberOfLines={1}>
+                          {g.name}
+                        </Text>
+                      </Pressable>
+                    );
+                  });
+                })()}
+              </View>
 
-              <Text style={styles.label}>Gates missed</Text>
-              <Text style={styles.value}>{result.gatesMissed.length}</Text>
               {result.gateHits.length > 0 && (
                 <>
                   <Text style={styles.section}>Gate Hits</Text>
@@ -616,5 +640,41 @@ const styles = StyleSheet.create({
   importingText: {
     fontSize: 13,
     color: '#666',
+  },
+  gateProgressSummary: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#1a5c8a',
+    marginBottom: 10,
+  },
+  gateProgressList: {
+    marginBottom: 8,
+  },
+  gateProgressRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    paddingVertical: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0ebe3',
+  },
+  gateProgressHit: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#2f7d32',
+    width: 20,
+    textAlign: 'center',
+  },
+  gateProgressMiss: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#c62828',
+    width: 20,
+    textAlign: 'center',
+  },
+  gateProgressName: {
+    fontSize: 15,
+    color: '#333',
+    flex: 1,
   },
 });
