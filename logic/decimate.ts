@@ -25,20 +25,26 @@ function segDist(p: Pt, a: Pt, b: Pt): number {
 }
 
 function rdp(pts: Pt[], eps: number, lo: number, hi: number, keep: Uint8Array): void {
-  if (hi <= lo + 1) return;
+  // Iterative implementation to avoid stack overflow on large GPX files (15k+ points).
+  const stack: Array<[number, number]> = [[lo, hi]];
 
-  let maxD = 0;
-  let maxI = lo;
+  while (stack.length > 0) {
+    const [l, h] = stack.pop()!;
+    if (h <= l + 1) continue;
 
-  for (let i = lo + 1; i < hi; i++) {
-    const d = segDist(pts[i], pts[lo], pts[hi]);
-    if (d > maxD) { maxD = d; maxI = i; }
-  }
+    let maxD = 0;
+    let maxI = l;
 
-  if (maxD > eps) {
-    keep[maxI] = 1;
-    rdp(pts, eps, lo, maxI, keep);
-    rdp(pts, eps, maxI, hi, keep);
+    for (let i = l + 1; i < h; i++) {
+      const d = segDist(pts[i], pts[l], pts[h]);
+      if (d > maxD) { maxD = d; maxI = i; }
+    }
+
+    if (maxD > eps) {
+      keep[maxI] = 1;
+      stack.push([l, maxI]);
+      stack.push([maxI, h]);
+    }
   }
 }
 

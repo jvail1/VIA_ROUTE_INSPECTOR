@@ -58,5 +58,16 @@ export function minDistanceIndexed(
     }
   }
 
+  // If no points found in neighbouring cells (gate far from route),
+  // fall back to brute-force scan of all points.
+  if (min === Infinity) {
+    for (const pts of cells.values()) {
+      for (const p of pts) {
+        const d = haversine(p.lat, p.lng, lat, lng);
+        if (d < min) min = d;
+      }
+    }
+  }
+
   return min;
 }
