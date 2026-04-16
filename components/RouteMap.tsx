@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useImperativeHandle, useMemo, useRef, forwardRef } from 'react';
+
 import { StyleSheet, View } from 'react-native';
 import MapView from 'react-native-map-clustering';
 import { Marker, Polyline } from 'react-native-maps';
@@ -8,6 +9,10 @@ import type { KmlOverlay } from '../logic/parseKmlOverlay';
 
 type RoutePoint = { lat: number; lng: number };
 
+export type RouteMapHandle = {
+  zoomTo: (lat: number, lng: number) => void;
+};
+
 type Props = {
   points: RoutePoint[];
   pois: Poi[];
@@ -15,7 +20,6 @@ type Props = {
   gateHits?: any[];
   kmlOverlay?: KmlOverlay | null;
   showKmlPoints?: boolean;
-  focusTarget?: { lat: number; lng: number; label?: string; ts?: number } | null;
 };
 
 function kmlLineColor(kind: string): string {
@@ -58,16 +62,28 @@ function poiTypeLabel(type: Poi['type']) {
   return type;
 }
 
-function RouteMap({
+const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
   points,
   pois,
   violations,
   gateHits = [],
   kmlOverlay,
   showKmlPoints,
-  focusTarget,
-}: Props) {
+}, ref) {
   const mapRef = useRef<any>(null);
+
+  useImperativeHandle(ref, () => ({
+    zoomTo(lat: number, lng: number) {
+      try {
+        mapRef.current?.animateToRegion(
+          { latitude: lat, longitude: lng, latitudeDelta: 0.02, longitudeDelta: 0.02 },
+          600
+        );
+      } catch (e) {
+        console.log('animateToRegion failed:', e);
+      }
+    },
+  }));
 
   const initialRegion = useMemo(() => routeRegion(points), [points]);
 
@@ -89,26 +105,6 @@ function RouteMap({
 
     return () => clearTimeout(timer);
   }, [routeCoords]);
-
-  // Focus target
-  useEffect(() => {
-    if (!focusTarget) return;
-    if (!mapRef.current) return;
-
-    try {
-      mapRef.current.animateToRegion(
-        {
-          latitude: focusTarget.lat,
-          longitude: focusTarget.lng,
-          latitudeDelta: 0.02,
-          longitudeDelta: 0.02,
-        },
-        600
-      );
-    } catch (e) {
-      console.log('animateToRegion failed:', e);
-    }
-  }, [focusTarget?.ts]);
 
   const poiMarkers = useMemo(
     () =>
@@ -234,21 +230,12 @@ function RouteMap({
           />
         ))}
 
-        {focusTarget && (
-          <Marker
-            key="focus-target"
-            coordinate={{ latitude: focusTarget.lat, longitude: focusTarget.lng }}
-            title={focusTarget.label || 'Selected'}
-            pinColor="magenta"
-            tracksViewChanges={false}
-          />
-        )}
       </MapView>
     </View>
   );
-}
+});
 
-export default React.memo(RouteMap);
+export default RouteMap;
 
 const styles = StyleSheet.create({
   container: {

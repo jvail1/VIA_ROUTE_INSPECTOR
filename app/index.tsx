@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -17,7 +17,7 @@ import { Asset } from 'expo-asset';
 
 import { inspectRoute } from '../logic/inspectRoute';
 import { parseGpx } from '../logic/gpx';
-import RouteMap from '../components/RouteMap';
+import RouteMap, { type RouteMapHandle } from '../components/RouteMap';
 import { parseCuratedPoiGpx, type Poi } from '../logic/curatedPois';
 import { minDistanceToRouteMeters } from '../logic/routeDistance';
 import { decimatePolyline } from '../logic/decimate';
@@ -112,7 +112,7 @@ export default function HomeScreen() {
   const [pointCount, setPointCount] = useState<number>(0);
   const [points, setPoints] = useState<RoutePoint[]>([]);
   const [result, setResult] = useState<InspectionResult | null>(null);
-  const [selectedMapTarget, setSelectedMapTarget] = useState<{ lat: number; lng: number; label?: string; ts?: number } | null>(null);
+  const routeMapRef = useRef<RouteMapHandle>(null);
 
   const [selectedGateDetail, setSelectedGateDetail] = useState<typeof gatesData[0] | null>(null);
 
@@ -522,7 +522,7 @@ export default function HomeScreen() {
                   pois={mapPois}
                   kmlOverlay={showKmlOverlay || showKmlPoints ? kmlOverlay : null}
                   showKmlPoints={showKmlPoints}
-                  focusTarget={selectedMapTarget}
+                  ref={routeMapRef}
                 />
               </View>
             </>
@@ -598,7 +598,7 @@ export default function HomeScreen() {
                         style={styles.row}
                         onPress={() => {
                           setSelectedGateDetail(g);
-                          setSelectedMapTarget({ lat: g.lat, lng: g.lng, label: g.name, ts: Date.now() });
+                          routeMapRef.current?.zoomTo(g.lat, g.lng);
                         }}
                       >
                         <View style={styles.gateProgressRow}>
