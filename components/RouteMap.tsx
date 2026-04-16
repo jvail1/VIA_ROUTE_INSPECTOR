@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import MapView from 'react-native-map-clustering';
 import { Marker, Polyline } from 'react-native-maps';
 
@@ -212,13 +212,10 @@ function RouteMap({
             key={g.key}
             coordinate={g.coordinate}
             title={g.title}
+            pinColor="gold"
             tracksViewChanges={false}
             zIndex={1000}
-          >
-            <View style={styles.gateMarker}>
-              <Text style={styles.gateMarkerText}>✓</Text>
-            </View>
-          </Marker>
+          />
         ))}
 
         {kmlPoints.map((pt) => (
@@ -260,25 +257,5 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
-  },
-  gateMarker: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: '#7C3AED',
-    borderWidth: 2,
-    borderColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    shadowOffset: { width: 0, height: 1 },
-    elevation: 4,
-  },
-  gateMarkerText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '700',
   },
 });
