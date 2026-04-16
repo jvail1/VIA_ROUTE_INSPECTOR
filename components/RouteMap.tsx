@@ -239,7 +239,7 @@ function RouteMap({
 
         {focusTarget && (
           <Marker
-            key={`focus-${focusTarget.ts}`}
+            key="focus-target"
             coordinate={{ latitude: focusTarget.lat, longitude: focusTarget.lng }}
             title={focusTarget.label || 'Selected'}
             pinColor="magenta"
