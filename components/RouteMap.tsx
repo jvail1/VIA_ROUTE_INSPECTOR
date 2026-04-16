@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import MapView from 'react-native-map-clustering';
 import { Marker, Polyline } from 'react-native-maps';
 
