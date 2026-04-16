@@ -100,8 +100,8 @@ function RouteMap({
         {
           latitude: focusTarget.lat,
           longitude: focusTarget.lng,
-          latitudeDelta: 0.08,
-          longitudeDelta: 0.08,
+          latitudeDelta: 0.02,
+          longitudeDelta: 0.02,
         },
         600
       );

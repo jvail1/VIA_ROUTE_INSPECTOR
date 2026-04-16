@@ -596,7 +596,10 @@ export default function HomeScreen() {
                       <Pressable
                         key={g.id}
                         style={styles.row}
-                        onPress={() => setSelectedGateDetail(g)}
+                        onPress={() => {
+                          setSelectedGateDetail(g);
+                          setSelectedMapTarget({ lat: g.lat, lng: g.lng, label: g.name, ts: Date.now() });
+                        }}
                       >
                         <View style={styles.gateProgressRow}>
                           <Text style={hit ? styles.gateProgressHit : styles.gateProgressMiss}>
