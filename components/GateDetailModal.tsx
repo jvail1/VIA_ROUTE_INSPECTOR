@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import { haversine } from '../logic/distance';
+import { formatDistance } from '../logic/formatDistance';
 import GateWeatherCard from './GateWeatherCard';
 import bannedData from '../data/banned.json';
 
@@ -82,7 +83,7 @@ export default function GateDetailModal({ gate, hit, closestM, distFromRouteEndK
             <View style={styles.stat}>
               <Text style={styles.statLabel}>STATUS</Text>
               <Text style={[styles.statValue, hit ? styles.hitText : styles.missText]}>
-                {hit ? 'Hit' : closestM != null && isFinite(closestM) ? `${closestM} m away` : 'Not near route'}
+                {hit ? 'Hit' : closestM != null && isFinite(closestM) ? `${formatDistance(closestM, 'km')} away` : 'Not near route'}
               </Text>
             </View>
           </View>

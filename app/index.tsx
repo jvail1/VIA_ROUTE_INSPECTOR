@@ -36,6 +36,7 @@ import { parseKmlOverlay, type KmlOverlay } from '../logic/parseKmlOverlay';
 import GateWeatherCard from '../components/GateWeatherCard';
 import GateDetailModal from '../components/GateDetailModal';
 import { haversine } from '../logic/distance';
+import { formatDistance } from '../logic/formatDistance';
 import gatesData from '../data/gates.json';
 
 function buildGatesGpx(): string {
@@ -616,7 +617,7 @@ export default function HomeScreen() {
                           {hit
                             ? 'Hit'
                             : closestM != null
-                              ? `${closestM} m from route`
+                              ? `${formatDistance(closestM, 'km')} from route`
                               : 'Missed'}{' '}
                           · Tap for details
                         </Text>
