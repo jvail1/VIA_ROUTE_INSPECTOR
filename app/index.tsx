@@ -87,6 +87,26 @@ function decimateRoute(points: RoutePoint[]): RoutePoint[] {
   return reduced.map((p) => ({ lat: p.latitude, lng: p.longitude }));
 }
 
+function routeBounds(points: RoutePoint[]) {
+  let minLat = points[0].lat;
+  let maxLat = points[0].lat;
+  let minLng = points[0].lng;
+  let maxLng = points[0].lng;
+
+  for (const p of points) {
+    if (p.lat < minLat) minLat = p.lat;
+    if (p.lat > maxLat) maxLat = p.lat;
+    if (p.lng < minLng) minLng = p.lng;
+    if (p.lng > maxLng) maxLng = p.lng;
+  }
+
+  return {
+    minLat: minLat - 0.02,
+    minLng: minLng - 0.02,
+    maxLat: maxLat + 0.02,
+    maxLng: maxLng + 0.02,
+  };
+}
 
 export default function HomeScreen() {
   const [fileName, setFileName] = useState<string>('No file selected');
@@ -281,7 +301,8 @@ export default function HomeScreen() {
     setLivePoiStatus('Starting…');
 
     try {
-      const fetched = await fetchLivePois(points, (pois, done, total) => {
+      const bounds = routeBounds(points);
+      const fetched = await fetchLivePois(bounds, (pois, done, total) => {
         setLivePoiStatus(`Tile ${done}/${total} — ${pois.length} POIs found`);
       });
       setLivePois(fetched);
