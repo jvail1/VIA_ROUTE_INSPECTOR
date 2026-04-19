@@ -221,7 +221,7 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
             key={g.key}
             coordinate={g.coordinate}
             title={g.title}
-            pinColor="gold"
+            pinColor="#FFD700"
             tracksViewChanges={false}
             zIndex={1000}
           />
