@@ -2,7 +2,7 @@ import React, { useEffect, useImperativeHandle, useMemo, useRef, forwardRef } fr
 
 import { Linking, Platform, StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-map-clustering';
-import { Callout, Marker, Polyline } from 'react-native-maps';
+import { Callout, Marker, Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import type { Poi } from '../logic/curatedPois';
 import type { KmlOverlay } from '../logic/parseKmlOverlay';
@@ -160,8 +160,12 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
         ref={mapRef}
         style={styles.map}
         initialRegion={initialRegion}
+        provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
         clusterColor="#2f7d32"
         clusterTextColor="#ffffff"
+        clusterFontFamily="System"
+        radius={40}
+        animationEnabled={false}
         tracksViewChanges={false}
       >
         {routeCoords.length > 1 && (
