@@ -25,16 +25,13 @@ Sentry.init({
   // spotlight: __DEV__,
 });
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
-
 export default Sentry.wrap(function RootLayout() {
   const colorScheme = useColorScheme();
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
       </Stack>
