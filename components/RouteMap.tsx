@@ -1,6 +1,6 @@
 import React, { useEffect, useImperativeHandle, useMemo, useRef, forwardRef } from 'react';
 
-import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-map-clustering';
 import { Callout, Marker, Polyline } from 'react-native-maps';
 
@@ -184,13 +184,11 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
             pinColor="blue"
             tracksViewChanges={false}
           >
-            <Callout>
+            <Callout onPress={() => Linking.openURL(p.mapsUrl)}>
               <View style={styles.callout}>
                 <Text style={styles.calloutTitle}>{p.title}</Text>
                 {p.notes ? <Text style={styles.calloutNotes}>{p.notes}</Text> : null}
-                <TouchableOpacity onPress={() => Linking.openURL(p.mapsUrl)}>
-                  <Text style={styles.calloutLink}>Open in Google Maps →</Text>
-                </TouchableOpacity>
+                <Text style={styles.calloutLink}>Open in Google Maps →</Text>
               </View>
             </Callout>
           </Marker>
@@ -249,22 +247,23 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   callout: {
-    width: 200,
-    padding: 6,
+    width: 220,
+    padding: 12,
   },
   calloutTitle: {
     fontWeight: '700',
     fontSize: 13,
-    marginBottom: 2,
+    marginBottom: 4,
   },
   calloutNotes: {
     fontSize: 11,
     color: '#555',
-    marginBottom: 6,
+    marginBottom: 8,
   },
   calloutLink: {
-    fontSize: 12,
+    fontSize: 13,
     color: '#1a73e8',
     fontWeight: '600',
+    paddingTop: 4,
   },
 });
