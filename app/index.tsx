@@ -8,6 +8,7 @@ import {
   Share,
   StyleSheet,
   Text,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -109,6 +110,7 @@ function routeBounds(points: RoutePoint[]) {
 }
 
 export default function HomeScreen() {
+  const { height: windowHeight } = useWindowDimensions();
   const [fileName, setFileName] = useState<string>('No file selected');
   const [pointCount, setPointCount] = useState<number>(0);
   const [points, setPoints] = useState<RoutePoint[]>([]);
@@ -514,7 +516,7 @@ export default function HomeScreen() {
               <Text style={styles.value}>Hazard lines: {kmlOverlay?.lines?.length || 0}</Text>
               <Text style={styles.value}>Hazard points: {kmlOverlay?.points?.length || 0}</Text>
 
-              <View style={styles.mapWrap}>
+              <View style={[styles.mapWrap, { height: Math.round(windowHeight * 0.6) }]}>
                 <RouteMap
                   key={routeMapKey}
                   points={points}
@@ -709,7 +711,6 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   mapWrap: {
-    height: 420,
     marginBottom: 20,
     overflow: 'hidden',
     borderRadius: 12,

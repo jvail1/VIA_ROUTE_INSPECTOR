@@ -1,8 +1,8 @@
 import React, { useEffect, useImperativeHandle, useMemo, useRef, forwardRef } from 'react';
 
-import { StyleSheet, View } from 'react-native';
+import { Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView from 'react-native-map-clustering';
-import { Marker, Polyline } from 'react-native-maps';
+import { Callout, Marker, Polyline } from 'react-native-maps';
 
 import type { Poi } from '../logic/curatedPois';
 import type { KmlOverlay } from '../logic/parseKmlOverlay';
@@ -111,14 +111,9 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
       pois.map((p) => ({
         key: p.id || `${p.type}-${p.lat}-${p.lng}`,
         coordinate: { latitude: p.lat, longitude: p.lng },
-        title: p.name || p.type,
-        description: [
-          poiTypeLabel(p.type),
-          p.notes,
-          `${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}`,
-        ]
-          .filter(Boolean)
-          .join('\n'),
+        title: p.name || poiTypeLabel(p.type),
+        notes: p.notes,
+        mapsUrl: `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`,
       })),
     [pois]
   );
@@ -186,11 +181,19 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
           <Marker
             key={p.key}
             coordinate={p.coordinate}
-            title={p.title}
-            description={p.description}
             pinColor="blue"
             tracksViewChanges={false}
-          />
+          >
+            <Callout>
+              <View style={styles.callout}>
+                <Text style={styles.calloutTitle}>{p.title}</Text>
+                {p.notes ? <Text style={styles.calloutNotes}>{p.notes}</Text> : null}
+                <TouchableOpacity onPress={() => Linking.openURL(p.mapsUrl)}>
+                  <Text style={styles.calloutLink}>Open in Google Maps →</Text>
+                </TouchableOpacity>
+              </View>
+            </Callout>
+          </Marker>
         ))}
 
         {violationMarkers.map((v: any) => (
@@ -244,5 +247,24 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  callout: {
+    width: 200,
+    padding: 6,
+  },
+  calloutTitle: {
+    fontWeight: '700',
+    fontSize: 13,
+    marginBottom: 2,
+  },
+  calloutNotes: {
+    fontSize: 11,
+    color: '#555',
+    marginBottom: 6,
+  },
+  calloutLink: {
+    fontSize: 12,
+    color: '#1a73e8',
+    fontWeight: '600',
   },
 });
