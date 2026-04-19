@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Alert,
   Button,
+  Platform,
   Pressable,
   ScrollView,
   Share,
@@ -78,7 +79,7 @@ const RADII = [
   { label: '5 km', value: 5000 },
   { label: '10 km', value: 10000 },
 ];
-const MAX_MAP_POIS = 100;
+const MAX_MAP_POIS = Platform.OS === 'android' ? 60 : 100;
 
 // Decimate route for caching — converts lat/lng ↔ latitude/longitude for RDP.
 // Reduces 40k points to ~500–2000, safe to store and restore without memory pressure.

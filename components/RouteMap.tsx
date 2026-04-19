@@ -164,7 +164,10 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
         clusterColor="#2f7d32"
         clusterTextColor="#ffffff"
         clusterFontFamily="System"
-        radius={40}
+        radius={60}
+        minPoints={2}
+        maxZoom={16}
+        extent={512}
         animationEnabled={false}
       >
         {routeCoords.length > 1 && (
