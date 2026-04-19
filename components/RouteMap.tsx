@@ -1,6 +1,6 @@
 import React, { useEffect, useImperativeHandle, useMemo, useRef, forwardRef } from 'react';
 
-import { Linking, StyleSheet, Text, View } from 'react-native';
+import { Linking, Platform, StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-map-clustering';
 import { Callout, Marker, Polyline } from 'react-native-maps';
 
@@ -177,22 +177,34 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
           />
         ))}
 
-        {poiMarkers.map((p) => (
-          <Marker
-            key={p.key}
-            coordinate={p.coordinate}
-            pinColor="blue"
-            tracksViewChanges={false}
-          >
-            <Callout onPress={() => Linking.openURL(p.mapsUrl)}>
-              <View style={styles.callout}>
-                <Text style={styles.calloutTitle}>{p.title}</Text>
-                {p.notes ? <Text style={styles.calloutNotes}>{p.notes}</Text> : null}
-                <Text style={styles.calloutLink}>Open in Google Maps →</Text>
-              </View>
-            </Callout>
-          </Marker>
-        ))}
+        {poiMarkers.map((p) =>
+          Platform.OS === 'android' ? (
+            <Marker
+              key={p.key}
+              coordinate={p.coordinate}
+              pinColor="blue"
+              tracksViewChanges={false}
+              title={p.title}
+              description={p.notes || 'Tap to open in Google Maps'}
+              onCalloutPress={() => Linking.openURL(p.mapsUrl)}
+            />
+          ) : (
+            <Marker
+              key={p.key}
+              coordinate={p.coordinate}
+              pinColor="blue"
+              tracksViewChanges={false}
+            >
+              <Callout onPress={() => Linking.openURL(p.mapsUrl)}>
+                <View style={styles.callout}>
+                  <Text style={styles.calloutTitle}>{p.title}</Text>
+                  {p.notes ? <Text style={styles.calloutNotes}>{p.notes}</Text> : null}
+                  <Text style={styles.calloutLink}>Open in Google Maps →</Text>
+                </View>
+              </Callout>
+            </Marker>
+          )
+        )}
 
         {violationMarkers.map((v: any) => (
           <Marker
