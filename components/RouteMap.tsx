@@ -166,7 +166,6 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
         clusterFontFamily="System"
         radius={40}
         animationEnabled={false}
-        tracksViewChanges={false}
       >
         {routeCoords.length > 1 && (
           <Polyline coordinates={routeCoords} strokeWidth={4} strokeColor="#1f6feb" />
@@ -187,7 +186,7 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
               key={p.key}
               coordinate={p.coordinate}
               pinColor="blue"
-              tracksViewChanges={false}
+              tracksViewChanges={Platform.OS !== 'android'}
               title={p.title}
               description={p.notes || 'Tap to open in Google Maps'}
               onCalloutPress={() => Linking.openURL(p.mapsUrl)}
@@ -197,7 +196,7 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
               key={p.key}
               coordinate={p.coordinate}
               pinColor="blue"
-              tracksViewChanges={false}
+              tracksViewChanges={Platform.OS !== 'android'}
             >
               <Callout onPress={() => Linking.openURL(p.mapsUrl)}>
                 <View style={styles.callout}>
@@ -216,7 +215,7 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
             coordinate={v.coordinate}
             title={v.title}
             pinColor="red"
-            tracksViewChanges={false}
+            tracksViewChanges={Platform.OS !== 'android'}
           />
         ))}
 
@@ -226,7 +225,7 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
             coordinate={g.coordinate}
             title={g.title}
             pinColor="#FFD700"
-            tracksViewChanges={false}
+            tracksViewChanges={Platform.OS !== 'android'}
             zIndex={1000}
           />
         ))}
@@ -241,9 +240,9 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
                 ? 'red'
                 : pt.kind === 'ferry'
                 ? 'green'
-                : 'orange'
+                : '#FFA500'
             }
-            tracksViewChanges={false}
+            tracksViewChanges={Platform.OS !== 'android'}
           />
         ))}
 
