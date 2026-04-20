@@ -1,8 +1,8 @@
 import React, { useEffect, useImperativeHandle, useMemo, useRef, forwardRef } from 'react';
 
 import { Linking, Platform, StyleSheet, Text, View } from 'react-native';
-import MapView from 'react-native-map-clustering';
-import { Callout, Marker, Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
+import ClusterMapView from 'react-native-map-clustering';
+import RNMapView, { Callout, Marker, Polyline } from 'react-native-maps';
 
 import type { Poi } from '../logic/curatedPois';
 import type { KmlOverlay } from '../logic/parseKmlOverlay';
@@ -71,6 +71,7 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
   showKmlPoints,
 }, ref) {
   const mapRef = useRef<any>(null);
+  const initialRegion = useMemo(() => routeRegion(points), [points]);
 
   useImperativeHandle(ref, () => ({
     zoomTo(lat: number, lng: number) {
@@ -84,8 +85,6 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
       }
     },
   }));
-
-  const initialRegion = useMemo(() => routeRegion(points), [points]);
 
   const routeCoords = useMemo(
     () => points.map((p) => ({ latitude: p.lat, longitude: p.lng })),
@@ -154,52 +153,104 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
     [kmlOverlay, showKmlPoints]
   );
 
+  const sharedChildren = (
+    <>
+      {routeCoords.length > 1 && (
+        <Polyline coordinates={routeCoords} strokeWidth={4} strokeColor="#1f6feb" />
+      )}
+
+      {kmlLines.map((line) => (
+        <Polyline
+          key={line.id}
+          coordinates={line.coordinates}
+          strokeWidth={3}
+          strokeColor={kmlLineColor(line.kind)}
+        />
+      ))}
+
+      {violationMarkers.map((v: any) => (
+        <Marker
+          key={v.key}
+          coordinate={v.coordinate}
+          title={v.title}
+          pinColor="red"
+          tracksViewChanges={false}
+        />
+      ))}
+
+      {gateHitMarkers.map((g) => (
+        <Marker
+          key={g.key}
+          coordinate={g.coordinate}
+          title={g.title}
+          pinColor="#FFD700"
+          tracksViewChanges={false}
+          zIndex={1000}
+        />
+      ))}
+
+      {kmlPoints.map((pt) => (
+        <Marker
+          key={pt.id}
+          coordinate={{ latitude: pt.latitude, longitude: pt.longitude }}
+          title={pt.name}
+          pinColor={
+            pt.kind === 'banned' || pt.kind === 'tunnel'
+              ? 'red'
+              : pt.kind === 'ferry'
+              ? 'green'
+              : '#FFA500'
+          }
+          tracksViewChanges={false}
+        />
+      ))}
+    </>
+  );
+
   return (
     <View style={styles.container}>
-      <MapView
-        ref={mapRef}
-        style={styles.map}
-        initialRegion={initialRegion}
-        provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
-        clusterColor="#2f7d32"
-        clusterTextColor="#ffffff"
-        clusterFontFamily="System"
-        radius={60}
-        minPoints={2}
-        maxZoom={16}
-        extent={512}
-        animationEnabled={false}
-      >
-        {routeCoords.length > 1 && (
-          <Polyline coordinates={routeCoords} strokeWidth={4} strokeColor="#1f6feb" />
-        )}
+      {Platform.OS === 'android' ? (
+        <RNMapView
+          ref={mapRef}
+          style={styles.map}
+          initialRegion={initialRegion}
+        >
+          {sharedChildren}
 
-        {kmlLines.map((line) => (
-          <Polyline
-            key={line.id}
-            coordinates={line.coordinates}
-            strokeWidth={3}
-            strokeColor={kmlLineColor(line.kind)}
-          />
-        ))}
-
-        {poiMarkers.map((p) =>
-          Platform.OS === 'android' ? (
+          {poiMarkers.map((p) => (
             <Marker
               key={p.key}
               coordinate={p.coordinate}
               pinColor="blue"
-              tracksViewChanges={Platform.OS !== 'android'}
+              tracksViewChanges={false}
               title={p.title}
               description={p.notes || 'Tap to open in Google Maps'}
               onCalloutPress={() => Linking.openURL(p.mapsUrl)}
             />
-          ) : (
+          ))}
+        </RNMapView>
+      ) : (
+        <ClusterMapView
+          ref={mapRef}
+          style={styles.map}
+          initialRegion={initialRegion}
+          clusterColor="#2f7d32"
+          clusterTextColor="#ffffff"
+          clusterFontFamily="System"
+          radius={60}
+          minPoints={2}
+          maxZoom={16}
+          extent={512}
+          animationEnabled={false}
+        >
+          {sharedChildren}
+
+          {poiMarkers.map((p) => (
             <Marker
               key={p.key}
               coordinate={p.coordinate}
               pinColor="blue"
-              tracksViewChanges={Platform.OS !== 'android'}
+              tracksViewChanges={false}
             >
               <Callout onPress={() => Linking.openURL(p.mapsUrl)}>
                 <View style={styles.callout}>
@@ -209,47 +260,9 @@ const RouteMap = forwardRef<RouteMapHandle, Props>(function RouteMap({
                 </View>
               </Callout>
             </Marker>
-          )
-        )}
-
-        {violationMarkers.map((v: any) => (
-          <Marker
-            key={v.key}
-            coordinate={v.coordinate}
-            title={v.title}
-            pinColor="red"
-            tracksViewChanges={Platform.OS !== 'android'}
-          />
-        ))}
-
-        {gateHitMarkers.map((g) => (
-          <Marker
-            key={g.key}
-            coordinate={g.coordinate}
-            title={g.title}
-            pinColor="#FFD700"
-            tracksViewChanges={Platform.OS !== 'android'}
-            zIndex={1000}
-          />
-        ))}
-
-        {kmlPoints.map((pt) => (
-          <Marker
-            key={pt.id}
-            coordinate={{ latitude: pt.latitude, longitude: pt.longitude }}
-            title={pt.name}
-            pinColor={
-              pt.kind === 'banned' || pt.kind === 'tunnel'
-                ? 'red'
-                : pt.kind === 'ferry'
-                ? 'green'
-                : '#FFA500'
-            }
-            tracksViewChanges={Platform.OS !== 'android'}
-          />
-        ))}
-
-      </MapView>
+          ))}
+        </ClusterMapView>
+      )}
     </View>
   );
 });
